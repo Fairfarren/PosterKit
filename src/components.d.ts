@@ -7,18 +7,11 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+        "add": (data: { width: number; height: number; image: HTMLImageElement; x: number; y: number; }) => Promise<void>;
+        "height": number;
+        "init": () => Promise<void>;
+        "reset": (list: typeof this.domList) => Promise<void>;
+        "width": number;
     }
 }
 declare global {
@@ -34,18 +27,8 @@ declare global {
 }
 declare namespace LocalJSX {
     interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+        "height"?: number;
+        "width"?: number;
     }
     interface IntrinsicElements {
         "my-component": MyComponent;

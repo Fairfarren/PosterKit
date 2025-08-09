@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
 
-    <script type="module" src="/build/designkit.esm.js"></script>
-    <script nomodule src="/build/designkit.js"></script>
-  </head>
-  <body>
-    <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/designkit.esm.js"></script>
+  <script nomodule src="/build/designkit.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      width: 420px;
+      height: 666.66px;
+      border: 2px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <my-component width="1080" height="1920"></my-component>
+  </div>
+</body>
+
 </html>
