@@ -17,7 +17,12 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "h.Fragment",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "typing/*": [
+        "typing/*"
+      ]
     },
     "baseUrl": "./"
   },

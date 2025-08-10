@@ -1,5 +1,5 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { MyComponent } from './my-component';
+import { MyComponent } from './kit-box';
 
 describe('my-component', () => {
   it('renders', async () => {

@@ -5,40 +5,56 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { CardData } from "../typing/index.d";
+export { CardData } from "../typing/index.d";
 export namespace Components {
-    interface MyComponent {
-        "add": (data: { width: number; height: number; image: HTMLImageElement; x: number; y: number; }) => Promise<void>;
+    interface KitBox {
+        "add": (data: CardData) => Promise<void>;
         "height": number;
         "init": () => Promise<void>;
-        "reset": (list: typeof this.domList) => Promise<void>;
         "width": number;
+    }
+    interface KitCard {
+        "data": CardData;
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLKitBoxElement extends Components.KitBox, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLKitBoxElement: {
+        prototype: HTMLKitBoxElement;
+        new (): HTMLKitBoxElement;
+    };
+    interface HTMLKitCardElement extends Components.KitCard, HTMLStencilElement {
+    }
+    var HTMLKitCardElement: {
+        prototype: HTMLKitCardElement;
+        new (): HTMLKitCardElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "kit-box": HTMLKitBoxElement;
+        "kit-card": HTMLKitCardElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
+    interface KitBox {
         "height"?: number;
         "width"?: number;
     }
+    interface KitCard {
+        "data"?: CardData;
+    }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "kit-box": KitBox;
+        "kit-card": KitCard;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "kit-box": LocalJSX.KitBox & JSXBase.HTMLAttributes<HTMLKitBoxElement>;
+            "kit-card": LocalJSX.KitCard & JSXBase.HTMLAttributes<HTMLKitCardElement>;
         }
     }
 }

@@ -24,8 +24,27 @@
 
 <body>
   <div class="box">
-    <my-component width="1080" height="1920"></my-component>
+    <kit-box id="kitBox" width="1080" height="1920"></kit-box>
+    <div>
+      <button onclick="add()">add</button>
+    </div>
   </div>
 </body>
+<script>
+  function add () {
+    const kitBox = document.querySelector('#kitBox')
+    const image = new Image()
+    image.src = 'https://material-center.meitudata.com/material/image/62fa22ac354485399.png'
+    image.crossOrigin = 'anonymous'
+
+    kitBox.add({
+      width: 100,
+      height: 100,
+      x: 0,
+      y: 0,
+      image
+    })
+  }
+</script>
 
 </html>
