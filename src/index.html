@@ -30,6 +30,9 @@
       <div>
         <button onclick="add()">add</button>
       </div>
+      <div>
+        <button onclick="getList()">getList</button>
+      </div>
     </div>
   </body>
   <script>
@@ -47,6 +50,12 @@
         y: 0,
         image,
       })
+    }
+
+    async function getList() {
+      const kitBox = document.querySelector('#kitBox')
+      const list = await kitBox.getDomList()
+      console.log(list)
     }
   </script>
 </html>

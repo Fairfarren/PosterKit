@@ -30,6 +30,11 @@ export class MyComponent {
     this.domList = [...this.domList, data]
   }
 
+  @Method()
+  public async getDomList() {
+    return this.domList
+  }
+
   componentDidLoad() {
     this.init()
   }

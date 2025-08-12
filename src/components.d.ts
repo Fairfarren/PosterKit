@@ -10,6 +10,7 @@ export { CardData } from "../typing/index.d";
 export namespace Components {
     interface KitBox {
         "add": (data: CardData) => Promise<void>;
+        "getDomList": () => Promise<CardData[]>;
         "height": number;
         "init": () => Promise<void>;
         "width": number;
