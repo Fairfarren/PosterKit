@@ -1,4 +1,12 @@
-import { Component, h, Prop, State } from '@stencil/core'
+import {
+  Component,
+  h,
+  Prop,
+  State,
+  Watch,
+  Event,
+  EventEmitter,
+} from '@stencil/core'
 import { CardData } from 'typing/index'
 
 @Component({
@@ -16,6 +24,16 @@ export class KitMove {
   @State() isDragging = false
   @State() isResizing = false
   @State() resizeDirection = ''
+
+  @Event() dataChanged: EventEmitter<CardData>
+  dataOnChanged(data: CardData) {
+    this.dataChanged.emit(data)
+  }
+
+  @Watch('data')
+  watch_data(newData: CardData) {
+    this.dataOnChanged(newData)
+  }
 
   private startX = 0
   private startY = 0

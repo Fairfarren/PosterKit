@@ -1,4 +1,4 @@
-import { Component, Prop, h, Method, State } from '@stencil/core'
+import { Component, Prop, h, Method, State, Watch } from '@stencil/core'
 import { CardData } from 'typing/index'
 
 // const imgList = [
@@ -19,12 +19,16 @@ export class MyComponent {
 
   @State() domList: CardData[] = []
   @State() moveData: CardData = {
+    id: '',
     width: 0,
     height: 0,
     x: 0,
     y: 0,
     image: null,
   }
+
+  // 添加一个状态来跟踪moveData的变化次数
+  @State() moveDataChangeCount = 0
 
   @Method()
   public async init() {
@@ -48,10 +52,20 @@ export class MyComponent {
 
   // 处理卡片点击的回调函数
   private handleCardClick = (cardData: CardData) => {
-    console.log('卡片被点击了:', cardData)
     this.moveData = {
       ...cardData,
     }
+  }
+
+  private onDataChanged(data) {
+    this.domList = this.domList.map((item) => {
+      if (item.id === data.id) {
+        item = {
+          ...data,
+        }
+      }
+      return item
+    })
   }
 
   render() {
@@ -67,7 +81,10 @@ export class MyComponent {
             onClick={() => this.handleCardClick(item)}
           />
         ))}
-        <kit-move data={this.moveData} />
+        <kit-move
+          data={this.moveData}
+          onDataChanged={(data) => this.onDataChanged.call(this, data.detail)}
+        />
       </div>
     )
   }

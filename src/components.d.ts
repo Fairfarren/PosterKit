@@ -22,6 +22,10 @@ export namespace Components {
         "data": CardData;
     }
 }
+export interface KitMoveCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKitMoveElement;
+}
 declare global {
     interface HTMLKitBoxElement extends Components.KitBox, HTMLStencilElement {
     }
@@ -35,7 +39,18 @@ declare global {
         prototype: HTMLKitCardElement;
         new (): HTMLKitCardElement;
     };
+    interface HTMLKitMoveElementEventMap {
+        "dataChanged": CardData;
+    }
     interface HTMLKitMoveElement extends Components.KitMove, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLKitMoveElementEventMap>(type: K, listener: (this: HTMLKitMoveElement, ev: KitMoveCustomEvent<HTMLKitMoveElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLKitMoveElementEventMap>(type: K, listener: (this: HTMLKitMoveElement, ev: KitMoveCustomEvent<HTMLKitMoveElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLKitMoveElement: {
         prototype: HTMLKitMoveElement;
@@ -57,6 +72,7 @@ declare namespace LocalJSX {
     }
     interface KitMove {
         "data"?: CardData;
+        "onDataChanged"?: (event: KitMoveCustomEvent<CardData>) => void;
     }
     interface IntrinsicElements {
         "kit-box": KitBox;
