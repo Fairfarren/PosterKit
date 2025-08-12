@@ -18,6 +18,13 @@ export class MyComponent {
   @Prop() height: number
 
   @State() domList: CardData[] = []
+  @State() moveData: CardData = {
+    width: 0,
+    height: 0,
+    x: 0,
+    y: 0,
+    image: null,
+  }
 
   @Method()
   public async init() {
@@ -39,6 +46,14 @@ export class MyComponent {
     this.init()
   }
 
+  // 处理卡片点击的回调函数
+  private handleCardClick = (cardData: CardData) => {
+    console.log('卡片被点击了:', cardData)
+    this.moveData = {
+      ...cardData,
+    }
+  }
+
   render() {
     return (
       <div
@@ -46,9 +61,13 @@ export class MyComponent {
         ref={(el) => (this.designkitRef = el as HTMLDivElement)}
       >
         {this.domList.map((item, index) => (
-          <kit-card key={index} data={item} />
+          <kit-card
+            key={index}
+            data={item}
+            onClick={() => this.handleCardClick(item)}
+          />
         ))}
-        canvas
+        <kit-move data={this.moveData} />
       </div>
     )
   }

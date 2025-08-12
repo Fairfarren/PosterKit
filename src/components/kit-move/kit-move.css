@@ -1,0 +1,84 @@
+.kit-move {
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: move;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+}
+
+.kit-move.dragging,
+.kit-move.resizing {
+  border-color: #007bff;
+}
+
+.resize-handle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #007bff;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  opacity: 1;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.resize-handle,
+.kit-move.dragging .resize-handle,
+.kit-move.resizing .resize-handle {
+  opacity: 1;
+}
+
+/* 八个方向的缩放点 */
+.resize-handle.nw {
+  top: -4px;
+  left: -4px;
+  cursor: nw-resize;
+}
+
+.resize-handle.n {
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: n-resize;
+}
+
+.resize-handle.ne {
+  top: -4px;
+  right: -4px;
+  cursor: ne-resize;
+}
+
+.resize-handle.e {
+  top: 50%;
+  right: -4px;
+  transform: translateY(-50%);
+  cursor: e-resize;
+}
+
+.resize-handle.se {
+  bottom: -4px;
+  right: -4px;
+  cursor: se-resize;
+}
+
+.resize-handle.s {
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: s-resize;
+}
+
+.resize-handle.sw {
+  bottom: -4px;
+  left: -4px;
+  cursor: sw-resize;
+}
+
+.resize-handle.w {
+  top: 50%;
+  left: -4px;
+  transform: translateY(-50%);
+  cursor: w-resize;
+}

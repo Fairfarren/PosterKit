@@ -18,6 +18,9 @@ export namespace Components {
     interface KitCard {
         "data": CardData;
     }
+    interface KitMove {
+        "data": CardData;
+    }
 }
 declare global {
     interface HTMLKitBoxElement extends Components.KitBox, HTMLStencilElement {
@@ -32,9 +35,16 @@ declare global {
         prototype: HTMLKitCardElement;
         new (): HTMLKitCardElement;
     };
+    interface HTMLKitMoveElement extends Components.KitMove, HTMLStencilElement {
+    }
+    var HTMLKitMoveElement: {
+        prototype: HTMLKitMoveElement;
+        new (): HTMLKitMoveElement;
+    };
     interface HTMLElementTagNameMap {
         "kit-box": HTMLKitBoxElement;
         "kit-card": HTMLKitCardElement;
+        "kit-move": HTMLKitMoveElement;
     }
 }
 declare namespace LocalJSX {
@@ -45,9 +55,13 @@ declare namespace LocalJSX {
     interface KitCard {
         "data"?: CardData;
     }
+    interface KitMove {
+        "data"?: CardData;
+    }
     interface IntrinsicElements {
         "kit-box": KitBox;
         "kit-card": KitCard;
+        "kit-move": KitMove;
     }
 }
 export { LocalJSX as JSX };
@@ -56,6 +70,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "kit-box": LocalJSX.KitBox & JSXBase.HTMLAttributes<HTMLKitBoxElement>;
             "kit-card": LocalJSX.KitCard & JSXBase.HTMLAttributes<HTMLKitCardElement>;
+            "kit-move": LocalJSX.KitMove & JSXBase.HTMLAttributes<HTMLKitMoveElement>;
         }
     }
 }
