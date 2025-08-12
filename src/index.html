@@ -1,50 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
+    />
+    <title>Stencil Component Starter</title>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-  <title>Stencil Component Starter</title>
+    <script type="module" src="/build/designkit.esm.js"></script>
+    <script nomodule src="/build/designkit.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
 
-  <script type="module" src="/build/designkit.esm.js"></script>
-  <script nomodule src="/build/designkit.js"></script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
+      .box {
+        width: 420px;
+        height: 666.66px;
+        border: 2px solid black;
+      }
+    </style>
+  </head>
 
-    .box {
-      width: 420px;
-      height: 666.66px;
-      border: 2px solid black;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="box">
-    <kit-box id="kitBox" width="1080" height="1920"></kit-box>
-    <div>
-      <button onclick="add()">add</button>
+  <body>
+    <div class="box">
+      <kit-box id="kitBox" width="1080" height="1920"></kit-box>
+      <div>
+        <button onclick="add()">add</button>
+      </div>
     </div>
-  </div>
-</body>
-<script>
-  function add () {
-    const kitBox = document.querySelector('#kitBox')
-    const image = new Image()
-    image.src = 'https://material-center.meitudata.com/material/image/62fa22ac354485399.png'
-    image.crossOrigin = 'anonymous'
+  </body>
+  <script>
+    function add() {
+      const kitBox = document.querySelector('#kitBox')
+      const image = new Image()
+      image.src =
+        'https://material-center.meitudata.com/material/image/62fa22ac354485399.png'
+      image.crossOrigin = 'anonymous'
 
-    kitBox.add({
-      width: 100,
-      height: 100,
-      x: 0,
-      y: 0,
-      image
-    })
-  }
-</script>
-
+      kitBox.add({
+        width: 100,
+        height: 100,
+        x: 0,
+        y: 0,
+        image,
+      })
+    }
+  </script>
 </html>

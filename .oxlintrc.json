@@ -1,0 +1,20 @@
+{
+    "plugins": [
+        "import",
+        "oxc",
+        "typescript",
+        "unicorn",
+        "react",
+        "react-perf"
+    ],
+    "rules": {
+        "object-curly-spacing": "error",
+        "curly": "error",
+        "react/exhaustive-deps": "off",
+        "import/no-empty-named-blocks": "error",
+        "no-duplicate-imports": "error",
+        "import/no-duplicates": "error",
+        "import/no-mutable-exports": "error"
+    },
+    "ignorePatterns": ["dist/", "node_modules/", "**/*.scss", "**/*.css"]
+}
