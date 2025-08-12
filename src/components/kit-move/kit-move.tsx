@@ -171,49 +171,51 @@ export class KitMove {
 
   render() {
     return (
-      <div
-        ref={(el) => (this.cardRef = el as HTMLDivElement)}
-        class="kit-move dragging resizing"
-        style={{
-          width: this.data.width + 'px',
-          height: this.data.height + 'px',
-          transform: `translateX(${this.data.x}px) translateY(${this.data.y}px)`,
-        }}
-        onMouseDown={this.handleCardMouseDown}
-      >
-        {/* 8个缩放控制点 */}
+      <div class="kit-move-box">
         <div
-          class="resize-handle nw"
-          onMouseDown={(e) => this.handleResizeMouseDown(e, 'nw')}
-        ></div>
-        <div
-          class="resize-handle n"
-          onMouseDown={(e) => this.handleResizeMouseDown(e, 'n')}
-        ></div>
-        <div
-          class="resize-handle ne"
-          onMouseDown={(e) => this.handleResizeMouseDown(e, 'ne')}
-        ></div>
-        <div
-          class="resize-handle e"
-          onMouseDown={(e) => this.handleResizeMouseDown(e, 'e')}
-        ></div>
-        <div
-          class="resize-handle se"
-          onMouseDown={(e) => this.handleResizeMouseDown(e, 'se')}
-        ></div>
-        <div
-          class="resize-handle s"
-          onMouseDown={(e) => this.handleResizeMouseDown(e, 's')}
-        ></div>
-        <div
-          class="resize-handle sw"
-          onMouseDown={(e) => this.handleResizeMouseDown(e, 'sw')}
-        ></div>
-        <div
-          class="resize-handle w"
-          onMouseDown={(e) => this.handleResizeMouseDown(e, 'w')}
-        ></div>
+          ref={(el) => (this.cardRef = el as HTMLDivElement)}
+          class="kit-move dragging resizing"
+          style={{
+            width: this.data.width + 'px',
+            height: this.data.height + 'px',
+            transform: `translateX(${this.data.x}px) translateY(${this.data.y}px)`,
+          }}
+          onMouseDown={this.handleCardMouseDown}
+        >
+          {/* 8个缩放控制点 */}
+          <div
+            class="resize-handle nw"
+            onMouseDown={(e) => this.handleResizeMouseDown(e, 'nw')}
+          ></div>
+          <div
+            class="resize-handle n"
+            onMouseDown={(e) => this.handleResizeMouseDown(e, 'n')}
+          ></div>
+          <div
+            class="resize-handle ne"
+            onMouseDown={(e) => this.handleResizeMouseDown(e, 'ne')}
+          ></div>
+          <div
+            class="resize-handle e"
+            onMouseDown={(e) => this.handleResizeMouseDown(e, 'e')}
+          ></div>
+          <div
+            class="resize-handle se"
+            onMouseDown={(e) => this.handleResizeMouseDown(e, 'se')}
+          ></div>
+          <div
+            class="resize-handle s"
+            onMouseDown={(e) => this.handleResizeMouseDown(e, 's')}
+          ></div>
+          <div
+            class="resize-handle sw"
+            onMouseDown={(e) => this.handleResizeMouseDown(e, 'sw')}
+          ></div>
+          <div
+            class="resize-handle w"
+            onMouseDown={(e) => this.handleResizeMouseDown(e, 'w')}
+          ></div>
+        </div>
       </div>
     )
   }

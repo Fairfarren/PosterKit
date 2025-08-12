@@ -19,18 +19,20 @@ export class KitCard {
 
   render() {
     return (
-      <div
-        ref={(el) => (this.cardRef = el as HTMLDivElement)}
-        class="kit-card"
-        style={{
-          width: this.data.width + 'px',
-          height: this.data.height + 'px',
-          transform: `translateX(${this.data.x}px) translateY(${this.data.y}px)`,
-          backgroundImage: `url(${this.data.image.src})`,
-          backgroundSize: '100% 100%',
-        }}
-      >
-        {/* 你的其他内容 */}
+      <div class="kit-card-box">
+        <div
+          ref={(el) => (this.cardRef = el as HTMLDivElement)}
+          class="kit-card"
+          style={{
+            width: this.data.width + 'px',
+            height: this.data.height + 'px',
+            transform: `translateX(${this.data.x}px) translateY(${this.data.y}px)`,
+            backgroundImage: `url(${this.data.image.src})`,
+            backgroundSize: '100% 100%',
+          }}
+        >
+          {/* 你的其他内容 */}
+        </div>
       </div>
     )
   }

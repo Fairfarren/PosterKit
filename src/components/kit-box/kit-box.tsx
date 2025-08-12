@@ -81,10 +81,12 @@ export class MyComponent {
             onClick={() => this.handleCardClick(item)}
           />
         ))}
-        <kit-move
-          data={this.moveData}
-          onDataChanged={(data) => this.onDataChanged.call(this, data.detail)}
-        />
+        {this.moveData.id && (
+          <kit-move
+            data={this.moveData}
+            onDataChanged={(data) => this.onDataChanged.call(this, data.detail)}
+          />
+        )}
       </div>
     )
   }
