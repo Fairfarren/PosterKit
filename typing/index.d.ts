@@ -16,4 +16,8 @@ export type CardData =
   | (BaseOptions & {
       type: Extract<CardType, 'text'>
       text: string
+      fontSize: number
+      fontFamily: string
+      color: string
+      fontWeight: string
     })

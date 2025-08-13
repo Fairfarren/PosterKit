@@ -16,8 +16,8 @@ export class KitSvg {
 
     const text = this.data.text
     const maxWidth = this.data.width // 留出一些边距
-    const lineHeight = 60 // 行高
-    const fontSize = 50
+    const lineHeight = this.data.fontSize * 1.4 // 行高
+    const fontSize = this.data.fontSize
 
     // 简单的换行逻辑：按字符数估算
     const charsPerLine = Math.floor(maxWidth / (fontSize * 0.6)) // 估算每行字符数
@@ -57,12 +57,12 @@ export class KitSvg {
                 letter-spacing="0"
                 writing-mode="horizontal-tb"
                 dominant-baseline="text-before-edge"
-                font-family="AlibabaPuHuiTi-Regular"
-                font-size="50"
+                font-family={this.data.fontFamily}
+                font-size={this.data.fontSize}
                 text-decoration="none"
                 font-style="normal"
-                font-weight="normal"
-                fill="#000000ff"
+                font-weight={this.data.fontWeight}
+                fill={this.data.color}
               >
                 {this.renderTextWithLineBreaks()}
               </text>
