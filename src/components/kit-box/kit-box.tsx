@@ -44,13 +44,41 @@ export class MyComponent {
     image: null,
     type: 'image',
   }
+
   @Watch('moveData')
   watch_moveData(newData: CardData) {
-    this.dataOnChange(newData)
+    this.dataOnChange({
+      ...newData,
+      width: newData.width / this.zoom,
+      height: newData.height / this.zoom,
+      x: newData.x / this.zoom,
+      y: newData.y / this.zoom,
+    })
   }
 
-  // 添加一个状态来跟踪moveData的变化次数
-  @State() moveDataChangeCount = 0
+  @Watch('zoom')
+  watch_zoom(newZoom: number, oldZoom: number) {
+    this.updateDomListZoom(newZoom, oldZoom)
+  }
+
+  private updateDomListZoom(zoom: number, oldZoom: number) {
+    this.domList = this.domList.map((item) => {
+      return {
+        ...item,
+        width: (item.width / oldZoom) * zoom,
+        height: (item.height / oldZoom) * zoom,
+        x: (item.x / oldZoom) * zoom,
+        y: (item.y / oldZoom) * zoom,
+      }
+    })
+    this.moveData = {
+      ...this.moveData,
+      width: (this.moveData.width / oldZoom) * zoom,
+      height: (this.moveData.height / oldZoom) * zoom,
+      x: (this.moveData.x / oldZoom) * zoom,
+      y: (this.moveData.y / oldZoom) * zoom,
+    }
+  }
 
   @Method()
   public async init(list: CardData[] = []) {
@@ -69,7 +97,16 @@ export class MyComponent {
 
   @Method()
   public async add(data: CardData) {
-    this.domList = [...this.domList, data]
+    this.domList = [
+      ...this.domList,
+      {
+        ...data,
+        width: data.width * this.zoom,
+        height: data.height * this.zoom,
+        x: data.x * this.zoom,
+        y: data.y * this.zoom,
+      },
+    ]
   }
 
   @Method()
@@ -79,6 +116,10 @@ export class MyComponent {
 
   @Method()
   public async updateCurrentData(data: CardData) {
+    data.width = data.width * this.zoom
+    data.height = data.height * this.zoom
+    data.x = data.x * this.zoom
+    data.y = data.y * this.zoom
     this.domList = this.domList.map((item) => {
       if (item.id === data.id) {
         item = {
@@ -170,12 +211,14 @@ export class MyComponent {
               <kit-card
                 key={index}
                 data={item}
+                zoom={this.zoom}
                 onClick={() => this.handleCardClick(item)}
               />
             ))}
           </div>
           {this.moveData.id && (
             <kit-move
+              zoom={this.zoom}
               data={this.moveData}
               onDataChanged={(data) =>
                 this.onDataChanged.call(this, data.detail)

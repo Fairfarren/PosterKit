@@ -8,10 +8,11 @@ import { CardData } from 'typing/index'
 export class KitCard {
   private cardRef?: HTMLDivElement
 
-  @Prop({
-    mutable: true,
-  })
+  @Prop()
   data: CardData
+
+  @Prop()
+  zoom: number = 1
 
   componentDidLoad() {
     console.log('KitCard => ', this.cardRef)

@@ -18,9 +18,17 @@ export namespace Components {
     }
     interface KitCard {
         "data": CardData;
+        /**
+          * @default 1
+         */
+        "zoom": number;
     }
     interface KitMove {
         "data": CardData;
+        /**
+          * @default 1
+         */
+        "zoom": number;
     }
     interface KitSvg {
         "data": CardData;
@@ -96,10 +104,18 @@ declare namespace LocalJSX {
     }
     interface KitCard {
         "data"?: CardData;
+        /**
+          * @default 1
+         */
+        "zoom"?: number;
     }
     interface KitMove {
         "data"?: CardData;
         "onDataChanged"?: (event: KitMoveCustomEvent<CardData>) => void;
+        /**
+          * @default 1
+         */
+        "zoom"?: number;
     }
     interface KitSvg {
         "data"?: CardData;

@@ -12,6 +12,9 @@ export class KitMove {
   @Prop()
   data: CardData
 
+  @Prop()
+  zoom: number = 1
+
   @State() isDragging = false
   @State() isResizing = false
   @State() resizeDirection = ''
@@ -156,7 +159,9 @@ export class KitMove {
   }
 
   private setData(data: CardData) {
-    this.dataOnChanged(data)
+    this.dataOnChanged({
+      ...data,
+    })
   }
 
   render() {
