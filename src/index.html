@@ -27,6 +27,9 @@
   <body>
     <div class="box">
       <kit-box id="kitBox" width="1080" height="1920"></kit-box>
+    </div>
+
+    <div>
       <div>
         <button onclick="add()">addImage</button>
       </div>
@@ -37,8 +40,21 @@
         <button onclick="getList()">getList</button>
       </div>
     </div>
+
+    <div>
+      当前选中数据:
+      <span id="currentDataJson"></span>
+    </div>
   </body>
   <script>
+    // 添加事件监听器
+    document.addEventListener('DOMContentLoaded', function () {
+      const kitBox = document.querySelector('#kitBox')
+      kitBox.addEventListener('currentDataChange', function (event) {
+        currentDataChange(event.detail)
+      })
+    })
+
     function add() {
       const kitBox = document.querySelector('#kitBox')
       const image = new Image()
@@ -80,6 +96,11 @@
       const kitBox = document.querySelector('#kitBox')
       const list = await kitBox.getDomList()
       console.log(list)
+    }
+
+    function currentDataChange(data) {
+      document.querySelector('#currentDataJson').innerText =
+        JSON.stringify(data)
     }
   </script>
 </html>

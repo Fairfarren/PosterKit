@@ -30,11 +30,6 @@ export class KitMove {
     this.dataChanged.emit(data)
   }
 
-  @Watch('data')
-  watch_data(newData: CardData) {
-    this.dataOnChanged(newData)
-  }
-
   private startX = 0
   private startY = 0
   private startWidth = 0
@@ -93,11 +88,11 @@ export class KitMove {
     const deltaX = e.clientX - this.startX
     const deltaY = e.clientY - this.startY
 
-    this.data = {
+    this.setData({
       ...this.data,
       x: this.startCardX + deltaX,
       y: this.startCardY + deltaY,
-    }
+    })
   }
 
   private handleResizeMouseDown = (e: MouseEvent, direction: string) => {
@@ -160,13 +155,17 @@ export class KitMove {
         break
     }
 
-    this.data = {
+    this.setData({
       ...this.data,
       width: newWidth,
       height: newHeight,
       x: newX,
       y: newY,
-    }
+    })
+  }
+
+  private setData(data: CardData) {
+    this.dataOnChanged(data)
   }
 
   render() {

@@ -1,4 +1,13 @@
-import { Component, Prop, h, Method, State } from '@stencil/core'
+import {
+  Component,
+  Prop,
+  h,
+  Method,
+  State,
+  EventEmitter,
+  Watch,
+  Event,
+} from '@stencil/core'
 import { CardData } from 'typing/index'
 
 // const imgList = [
@@ -17,6 +26,11 @@ export class MyComponent {
   @Prop() width: number
   @Prop() height: number
 
+  @Event() currentDataChange: EventEmitter<CardData>
+  dataOnChange(data: CardData) {
+    this.currentDataChange.emit(data)
+  }
+
   @State() domList: CardData[] = []
   @State() moveData: CardData = {
     id: '',
@@ -26,6 +40,10 @@ export class MyComponent {
     y: 0,
     image: null,
     type: 'image',
+  }
+  @Watch('moveData')
+  watch_moveData(newData: CardData) {
+    this.dataOnChange(newData)
   }
 
   // 添加一个状态来跟踪moveData的变化次数
@@ -67,6 +85,9 @@ export class MyComponent {
       }
       return item
     })
+    this.moveData = {
+      ...data,
+    }
   }
 
   render() {
