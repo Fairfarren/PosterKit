@@ -65,6 +65,22 @@ export class MyComponent {
     return this.domList
   }
 
+  @Method()
+  public async updateCurrentData(data: CardData) {
+    this.domList = this.domList.map((item) => {
+      if (item.id === data.id) {
+        item = {
+          ...item,
+          ...data,
+        }
+      }
+      return item
+    })
+    this.moveData = {
+      ...data,
+    }
+  }
+
   componentDidLoad() {
     this.init()
   }

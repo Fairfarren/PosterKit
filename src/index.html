@@ -43,10 +43,14 @@
 
     <div>
       当前选中数据:
-      <span id="currentDataJson"></span>
+      <span id="currentDataJson" contenteditable="true"></span>
+      <div>
+        <button onclick="updateCurrentData()">确定更改参数</button>
+      </div>
     </div>
   </body>
   <script>
+    let currentData = {}
     // 添加事件监听器
     document.addEventListener('DOMContentLoaded', function () {
       const kitBox = document.querySelector('#kitBox')
@@ -99,8 +103,24 @@
     }
 
     function currentDataChange(data) {
+      currentData = data
       document.querySelector('#currentDataJson').innerText =
         JSON.stringify(data)
+    }
+
+    function updateCurrentData() {
+      const currentDataJson =
+        document.querySelector('#currentDataJson').innerText
+      try {
+        const data = JSON.parse(currentDataJson)
+        const kitBox = document.querySelector('#kitBox')
+        if (data.type === 'image') {
+          data.image = currentData.image
+        }
+        kitBox.updateCurrentData(data)
+      } catch (error) {
+        console.error('Invalid JSON format:', error)
+      }
     }
   </script>
 </html>

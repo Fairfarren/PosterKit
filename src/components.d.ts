@@ -13,6 +13,7 @@ export namespace Components {
         "getDomList": () => Promise<CardData[]>;
         "height": number;
         "init": () => Promise<void>;
+        "updateCurrentData": (data: CardData) => Promise<void>;
         "width": number;
     }
     interface KitCard {
