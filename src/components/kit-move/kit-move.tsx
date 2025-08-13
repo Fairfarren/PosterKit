@@ -7,6 +7,7 @@ import { CardData } from 'typing/index'
 })
 export class KitMove {
   private cardRef?: HTMLDivElement
+  private minWidth = 10
 
   @Prop()
   data: CardData
@@ -110,37 +111,37 @@ export class KitMove {
 
     switch (this.resizeDirection) {
       case 'nw':
-        newWidth = Math.max(10, this.startWidth - deltaX)
-        newHeight = Math.max(10, this.startHeight - deltaY)
+        newWidth = Math.max(this.minWidth, this.startWidth - deltaX)
+        newHeight = Math.max(this.minWidth, this.startHeight - deltaY)
         newX = this.startCardX + (this.startWidth - newWidth)
         newY = this.startCardY + (this.startHeight - newHeight)
         break
       case 'n':
-        newHeight = Math.max(10, this.startHeight - deltaY)
+        newHeight = Math.max(this.minWidth, this.startHeight - deltaY)
         newY = this.startCardY + (this.startHeight - newHeight)
         break
       case 'ne':
-        newWidth = Math.max(10, this.startWidth + deltaX)
-        newHeight = Math.max(10, this.startHeight - deltaY)
+        newWidth = Math.max(this.minWidth, this.startWidth + deltaX)
+        newHeight = Math.max(this.minWidth, this.startHeight - deltaY)
         newY = this.startCardY + (this.startHeight - newHeight)
         break
       case 'e':
-        newWidth = Math.max(10, this.startWidth + deltaX)
+        newWidth = Math.max(this.minWidth, this.startWidth + deltaX)
         break
       case 'se':
-        newWidth = Math.max(10, this.startWidth + deltaX)
-        newHeight = Math.max(10, this.startHeight + deltaY)
+        newWidth = Math.max(this.minWidth, this.startWidth + deltaX)
+        newHeight = Math.max(this.minWidth, this.startHeight + deltaY)
         break
       case 's':
-        newHeight = Math.max(10, this.startHeight + deltaY)
+        newHeight = Math.max(this.minWidth, this.startHeight + deltaY)
         break
       case 'sw':
-        newWidth = Math.max(10, this.startWidth - deltaX)
-        newHeight = Math.max(10, this.startHeight + deltaY)
+        newWidth = Math.max(this.minWidth, this.startWidth - deltaX)
+        newHeight = Math.max(this.minWidth, this.startHeight + deltaY)
         newX = this.startCardX + (this.startWidth - newWidth)
         break
       case 'w':
-        newWidth = Math.max(10, this.startWidth - deltaX)
+        newWidth = Math.max(this.minWidth, this.startWidth - deltaX)
         newX = this.startCardX + (this.startWidth - newWidth)
         break
     }
