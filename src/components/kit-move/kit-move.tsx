@@ -8,9 +8,7 @@ import { CardData } from 'typing/index'
 export class KitMove {
   private cardRef?: HTMLDivElement
 
-  @Prop({
-    mutable: true,
-  })
+  @Prop()
   data: CardData
 
   @State() isDragging = false
