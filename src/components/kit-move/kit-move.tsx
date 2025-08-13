@@ -32,7 +32,6 @@ export class KitMove {
   private startCardY = 0
 
   componentDidLoad() {
-    console.log('KitCard => ', this.cardRef)
     this.addGlobalEventListeners()
   }
 

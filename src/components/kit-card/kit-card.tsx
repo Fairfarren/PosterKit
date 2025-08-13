@@ -14,10 +14,6 @@ export class KitCard {
   @Prop()
   zoom: number = 1
 
-  componentDidLoad() {
-    console.log('KitCard => ', this.cardRef)
-  }
-
   render() {
     return (
       <div class="kit-card-box">
