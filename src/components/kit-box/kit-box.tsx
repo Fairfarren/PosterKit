@@ -74,13 +74,15 @@ export class MyComponent {
         class="designkit"
         ref={(el) => (this.designkitRef = el as HTMLDivElement)}
       >
-        {this.domList.map((item, index) => (
-          <kit-card
-            key={index}
-            data={item}
-            onClick={() => this.handleCardClick(item)}
-          />
-        ))}
+        <div class="kit-list">
+          {this.domList.map((item, index) => (
+            <kit-card
+              key={index}
+              data={item}
+              onClick={() => this.handleCardClick(item)}
+            />
+          ))}
+        </div>
         {this.moveData.id && (
           <kit-move
             data={this.moveData}
