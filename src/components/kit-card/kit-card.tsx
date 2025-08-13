@@ -1,4 +1,4 @@
-import { Component, h, Prop, Event, EventEmitter } from '@stencil/core'
+import { Component, h, Prop } from '@stencil/core'
 import { CardData } from 'typing/index'
 
 @Component({
