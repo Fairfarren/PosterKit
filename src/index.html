@@ -68,7 +68,7 @@
     }
 
     const defaultText = {
-      id: new Date().getTime(),
+      id: new Date().getTime() + 1,
       width: 100,
       height: 100,
       x: 0,
@@ -94,32 +94,7 @@
 
     function init() {
       const kitBox = document.querySelector('#kitBox')
-      kitBox.init([
-        {
-          id: 1,
-          width: 100,
-          height: 100,
-          x: 0,
-          y: 0,
-          image,
-          type: 'image',
-        },
-        {
-          id: 2,
-          width: 100,
-          height: 100,
-          x: 200,
-          y: 200,
-          text: '你好世界你好世界1234567890🤔abcdefghijklmnopqrstuvwxyz',
-          type: 'text',
-          fontSize: 32,
-          fontFamily: 'cursive',
-          color: '#db3f9178',
-          fontWeight: 'bold',
-          fontStyle: 'italic',
-          decoration: 'line-through',
-        },
-      ])
+      kitBox.init([defaultImage, defaultText])
     }
 
     function add() {
