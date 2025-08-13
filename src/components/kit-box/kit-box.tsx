@@ -162,7 +162,10 @@ export class MyComponent {
   }
 
   componentDidLoad() {
-    this.calculatePreviewSize()
+    // 使用 requestAnimationFrame 延迟状态更新，避免在同一渲染周期内重新渲染
+    requestAnimationFrame(() => {
+      this.calculatePreviewSize()
+    })
 
     // 监听窗口大小变化
     window.addEventListener('resize', this.resizeHandler)

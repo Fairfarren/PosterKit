@@ -7,7 +7,6 @@
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
     />
     <title>Stencil Component Starter</title>
-
     <script type="module" src="/build/designkit.esm.js"></script>
     <script nomodule src="/build/designkit.js"></script>
     <style>
@@ -18,9 +17,13 @@
 
       .box {
         width: 100vw;
-        height: 1080px;
+        height: 500px;
         border: 2px solid black;
         box-sizing: border-box;
+      }
+
+      .dataDiv {
+        padding: 20px;
       }
     </style>
   </head>
@@ -45,9 +48,10 @@
       </div>
     </div>
 
-    <div>
+    <div class="dataDiv">
       当前选中数据:
       <span id="currentDataJson" contenteditable="true"></span>
+      <form id="form"></form>
       <div>
         <button onclick="updateCurrentData()">确定更改参数</button>
       </div>
@@ -60,8 +64,8 @@
     image.crossOrigin = 'anonymous'
     const defaultImage = {
       id: new Date().getTime(),
-      width: 1080,
-      height: 1920,
+      width: 300,
+      height: 300,
       x: 0,
       y: 0,
       image,
@@ -70,8 +74,8 @@
 
     const defaultText = {
       id: new Date().getTime() + 1,
-      width: 100,
-      height: 100,
+      width: 300,
+      height: 200,
       x: 0,
       y: 0,
       text: '你好世界你好世界1234567890🤔abcdefghijklmnopqrstuvwxyz',
@@ -100,12 +104,18 @@
 
     function add() {
       const kitBox = document.querySelector('#kitBox')
-      kitBox.add(defaultImage)
+      kitBox.add({
+        ...defaultImage,
+        id: new Date().getTime(),
+      })
     }
 
     function addText() {
       const kitBox = document.querySelector('#kitBox')
-      kitBox.add(defaultText)
+      kitBox.add({
+        ...defaultText,
+        id: new Date().getTime(),
+      })
     }
 
     async function getList() {
@@ -115,24 +125,42 @@
     }
 
     function currentDataChange(data) {
+      if (!data.id) {
+        return
+      }
       currentData = data
-      document.querySelector('#currentDataJson').innerText =
-        JSON.stringify(data)
+      const form = document.querySelector('#form')
+      form.innerHTML = ''
+      Object.entries(data).forEach(([key, value]) => {
+        const div = document.createElement('div')
+        const input = document.createElement('input')
+        input.type = 'text'
+        input.name = key
+        input.value = value
+        if (key === 'type' || key === 'id' || key === 'image') {
+          input.disabled = true
+        }
+        div.innerText = `${key}: `
+        div.appendChild(input)
+        form.appendChild(div)
+      })
     }
 
     function updateCurrentData() {
-      const currentDataJson =
-        document.querySelector('#currentDataJson').innerText
-      try {
-        const data = JSON.parse(currentDataJson)
-        const kitBox = document.querySelector('#kitBox')
-        if (data.type === 'image') {
-          data.image = currentData.image
+      const form = document.querySelector('#form')
+      const formData = new FormData(form)
+      const params = {}
+      formData.entries().forEach(([key, value]) => {
+        if (key === 'image') {
+          params[key] = currentData.image
+        } else {
+          params[key] = value
         }
-        kitBox.updateCurrentData(data)
-      } catch (error) {
-        console.error('Invalid JSON format:', error)
-      }
+      })
+      kitBox.updateCurrentData({
+        ...currentData,
+        ...params,
+      })
     }
   </script>
 </html>
