@@ -22,6 +22,9 @@ import { CardData } from 'typing/index'
 export class MyComponent {
   // 用于存储 designkit div 的引用
   private designkitRef?: HTMLDivElement
+  @State() private zoom = 1
+  @State() private previewWidth = 0
+  @State() private previewHeight = 0
 
   @Prop() width: number
   @Prop() height: number
@@ -51,8 +54,6 @@ export class MyComponent {
 
   @Method()
   public async init(list: CardData[] = []) {
-    // 使用 designkitRef 获取 div.designkit 元素
-    console.log('designkit div:', this.designkitRef)
     this.domList = list
     if (this.moveData.id) {
       list.find((item) => {
@@ -92,8 +93,42 @@ export class MyComponent {
     }
   }
 
+  // 计算预览区域的尺寸和缩放比例
+  private calculatePreviewSize() {
+    if (!this.designkitRef) {
+      return
+    }
+
+    const containerRect = this.designkitRef.getBoundingClientRect()
+    const containerWidth = containerRect.width
+    const containerHeight = containerRect.height
+
+    // 计算基于宽度和高度的缩放比例
+    const scaleX = containerWidth / this.width
+    const scaleY = containerHeight / this.height
+
+    // 取较小的缩放比例，确保内容完全显示在容器内
+    this.zoom = Math.min(scaleX, scaleY, 1) // 最大不超过 1（100%）
+
+    // 计算预览区域的实际尺寸
+    this.previewWidth = this.width * this.zoom
+    this.previewHeight = this.height * this.zoom
+  }
+
+  // 用于存储事件监听器引用
+  private resizeHandler = () => {
+    this.calculatePreviewSize()
+  }
+
   componentDidLoad() {
-    this.init()
+    this.calculatePreviewSize()
+
+    // 监听窗口大小变化
+    window.addEventListener('resize', this.resizeHandler)
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener('resize', this.resizeHandler)
   }
 
   // 处理卡片点击的回调函数
@@ -123,21 +158,31 @@ export class MyComponent {
         class="designkit"
         ref={(el) => (this.designkitRef = el as HTMLDivElement)}
       >
-        <div class="kit-list">
-          {this.domList.map((item, index) => (
-            <kit-card
-              key={index}
-              data={item}
-              onClick={() => this.handleCardClick(item)}
+        <div
+          class="kit-preview"
+          style={{
+            width: `${this.previewWidth}px`,
+            height: `${this.previewHeight}px`,
+          }}
+        >
+          <div class="kit-list">
+            {this.domList.map((item, index) => (
+              <kit-card
+                key={index}
+                data={item}
+                onClick={() => this.handleCardClick(item)}
+              />
+            ))}
+          </div>
+          {this.moveData.id && (
+            <kit-move
+              data={this.moveData}
+              onDataChanged={(data) =>
+                this.onDataChanged.call(this, data.detail)
+              }
             />
-          ))}
+          )}
         </div>
-        {this.moveData.id && (
-          <kit-move
-            data={this.moveData}
-            onDataChanged={(data) => this.onDataChanged.call(this, data.detail)}
-          />
-        )}
       </div>
     )
   }
