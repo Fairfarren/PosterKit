@@ -20,7 +20,7 @@ export class KitSvg {
     const fontSize = this.data.fontSize
 
     // 简单的换行逻辑：按字符数估算
-    const charsPerLine = Math.floor(maxWidth / (fontSize * 0.6)) // 估算每行字符数
+    const charsPerLine = Math.floor(maxWidth / fontSize) // 估算每行字符数
     const lines = []
 
     for (let i = 0; i < text.length; i += charsPerLine) {
@@ -59,8 +59,8 @@ export class KitSvg {
                 dominant-baseline="text-before-edge"
                 font-family={this.data.fontFamily}
                 font-size={this.data.fontSize}
-                text-decoration="none"
-                font-style="normal"
+                text-decoration={this.data.decoration}
+                font-style={this.data.fontStyle}
                 font-weight={this.data.fontWeight}
                 fill={this.data.color}
               >

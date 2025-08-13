@@ -20,4 +20,6 @@ export type CardData =
       fontFamily: string
       color: string
       fontWeight: string
+      fontStyle: 'normal' | 'italic'
+      decoration: 'none' | 'underline' | 'line-through'
     })
