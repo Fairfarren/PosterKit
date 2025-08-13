@@ -15,16 +15,45 @@ export class KitSvg {
     }
 
     const text = this.data.text
-    const maxWidth = this.data.width // 留出一些边距
+    const maxWidth = this.data.width - this.data.fontSize * 0.2 // 留出一些边距
     const lineHeight = this.data.fontSize * 1.4 // 行高
     const fontSize = this.data.fontSize
 
-    // 简单的换行逻辑：按字符数估算
-    const charsPerLine = Math.floor(maxWidth / fontSize) // 估算每行字符数
-    const lines = []
+    // 创建临时 canvas 来测量文本宽度
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    if (!ctx) {
+      return [
+        <tspan key={0} x="0" dy="0">
+          {text}
+        </tspan>,
+      ]
+    }
 
-    for (let i = 0; i < text.length; i += charsPerLine) {
-      lines.push(text.slice(i, i + charsPerLine))
+    ctx.font = `${this.data.fontStyle || 'normal'} ${this.data.fontWeight || 'normal'} ${fontSize}px ${this.data.fontFamily || 'Arial'}`
+
+    const lines = []
+    let currentLine = ''
+    let currentWidth = 0
+
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i]
+      const charWidth = ctx.measureText(char).width
+
+      // 如果添加这个字符会超出宽度，则开始新行
+      if (currentWidth + charWidth > maxWidth && currentLine.length > 0) {
+        lines.push(currentLine)
+        currentLine = char
+        currentWidth = charWidth
+      } else {
+        currentLine += char
+        currentWidth += charWidth
+      }
+    }
+
+    // 添加最后一行
+    if (currentLine.length > 0) {
+      lines.push(currentLine)
     }
 
     return lines.map((line, index) => (
