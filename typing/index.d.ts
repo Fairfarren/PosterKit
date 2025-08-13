@@ -10,11 +10,11 @@ interface BaseOptions {
 
 export type CardData =
   | (BaseOptions & {
-      type: Extract<CardType, 'image'>
+      type: 'image'
       image: HTMLImageElement
     })
   | (BaseOptions & {
-      type: Extract<CardType, 'text'>
+      type: 'text'
       text: string
       fontSize: number
       fontFamily: string

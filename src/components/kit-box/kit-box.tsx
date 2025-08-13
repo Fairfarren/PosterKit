@@ -196,11 +196,17 @@ export class MyComponent {
     }
   }
 
+  private clearMoveData = (e) => {
+    e.stopPropagation()
+    this.onDataChanged({})
+  }
+
   render() {
     return (
       <div
         class="designkit"
         ref={(el) => (this.designkitRef = el as HTMLDivElement)}
+        onClick={this.clearMoveData}
       >
         <div
           class="kit-preview"
@@ -215,7 +221,10 @@ export class MyComponent {
                 key={index}
                 data={item}
                 zoom={this.zoom}
-                onClick={() => this.handleCardClick(item)}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  this.handleCardClick(item)
+                }}
               />
             ))}
           </div>
@@ -226,6 +235,7 @@ export class MyComponent {
               onDataChanged={(data) =>
                 this.onDataChanged.call(this, data.detail)
               }
+              onClick={(e) => e.stopPropagation()}
             />
           )}
         </div>

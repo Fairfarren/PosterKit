@@ -1,4 +1,4 @@
-import { Component, h, Prop } from '@stencil/core'
+import { Component, h, Prop, Event, EventEmitter } from '@stencil/core'
 import { CardData } from 'typing/index'
 
 @Component({
@@ -6,8 +6,6 @@ import { CardData } from 'typing/index'
   styleUrl: 'kit-card.css',
 })
 export class KitCard {
-  private cardRef?: HTMLDivElement
-
   @Prop()
   data: CardData
 
@@ -18,7 +16,6 @@ export class KitCard {
     return (
       <div class="kit-card-box">
         <div
-          ref={(el) => (this.cardRef = el as HTMLDivElement)}
           class="kit-card"
           style={{
             width: this.data.width + 'px',

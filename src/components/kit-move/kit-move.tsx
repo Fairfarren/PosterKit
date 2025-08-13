@@ -6,7 +6,6 @@ import { CardData } from 'typing/index'
   styleUrl: 'kit-move.css',
 })
 export class KitMove {
-  private cardRef?: HTMLDivElement
   private minWidth = 10
 
   @Prop()
@@ -167,7 +166,6 @@ export class KitMove {
     return (
       <div class="kit-move-box">
         <div
-          ref={(el) => (this.cardRef = el as HTMLDivElement)}
           class="kit-move dragging resizing"
           style={{
             width: this.data.width + 'px',
