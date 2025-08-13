@@ -1,4 +1,4 @@
-import { Component, Prop, h, Method, State, Watch } from '@stencil/core'
+import { Component, Prop, h, Method, State } from '@stencil/core'
 import { CardData } from 'typing/index'
 
 // const imgList = [
@@ -25,6 +25,7 @@ export class MyComponent {
     x: 0,
     y: 0,
     image: null,
+    type: 'image',
   }
 
   // 添加一个状态来跟踪moveData的变化次数

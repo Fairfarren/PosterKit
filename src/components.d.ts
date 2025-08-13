@@ -21,6 +21,9 @@ export namespace Components {
     interface KitMove {
         "data": CardData;
     }
+    interface KitSvg {
+        "data": CardData;
+    }
 }
 export interface KitMoveCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -56,10 +59,17 @@ declare global {
         prototype: HTMLKitMoveElement;
         new (): HTMLKitMoveElement;
     };
+    interface HTMLKitSvgElement extends Components.KitSvg, HTMLStencilElement {
+    }
+    var HTMLKitSvgElement: {
+        prototype: HTMLKitSvgElement;
+        new (): HTMLKitSvgElement;
+    };
     interface HTMLElementTagNameMap {
         "kit-box": HTMLKitBoxElement;
         "kit-card": HTMLKitCardElement;
         "kit-move": HTMLKitMoveElement;
+        "kit-svg": HTMLKitSvgElement;
     }
 }
 declare namespace LocalJSX {
@@ -74,10 +84,14 @@ declare namespace LocalJSX {
         "data"?: CardData;
         "onDataChanged"?: (event: KitMoveCustomEvent<CardData>) => void;
     }
+    interface KitSvg {
+        "data"?: CardData;
+    }
     interface IntrinsicElements {
         "kit-box": KitBox;
         "kit-card": KitCard;
         "kit-move": KitMove;
+        "kit-svg": KitSvg;
     }
 }
 export { LocalJSX as JSX };
@@ -87,6 +101,7 @@ declare module "@stencil/core" {
             "kit-box": LocalJSX.KitBox & JSXBase.HTMLAttributes<HTMLKitBoxElement>;
             "kit-card": LocalJSX.KitCard & JSXBase.HTMLAttributes<HTMLKitCardElement>;
             "kit-move": LocalJSX.KitMove & JSXBase.HTMLAttributes<HTMLKitMoveElement>;
+            "kit-svg": LocalJSX.KitSvg & JSXBase.HTMLAttributes<HTMLKitSvgElement>;
         }
     }
 }

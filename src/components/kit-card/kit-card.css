@@ -11,6 +11,7 @@
   cursor: move;
   border: 2px solid transparent;
   box-sizing: border-box;
+  word-break: break-all;
 }
 
 .kit-card:hover,

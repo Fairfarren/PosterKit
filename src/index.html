@@ -28,7 +28,10 @@
     <div class="box">
       <kit-box id="kitBox" width="1080" height="1920"></kit-box>
       <div>
-        <button onclick="add()">add</button>
+        <button onclick="add()">addImage</button>
+      </div>
+      <div>
+        <button onclick="addText()">addText</button>
       </div>
       <div>
         <button onclick="getList()">getList</button>
@@ -50,6 +53,20 @@
         x: 0,
         y: 0,
         image,
+        type: 'image',
+      })
+    }
+
+    function addText() {
+      const kitBox = document.querySelector('#kitBox')
+      kitBox.add({
+        id: new Date().getTime(),
+        width: 100,
+        height: 100,
+        x: 0,
+        y: 0,
+        text: '卡拉斯的积分的螺蛳粉框架爱上lks🤔djfklj',
+        type: 'text',
       })
     }
 

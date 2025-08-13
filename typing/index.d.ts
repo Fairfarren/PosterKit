@@ -1,8 +1,19 @@
-export interface CardData {
+export type CardType = 'image' | 'text'
+
+interface BaseOptions {
   id: string
   width: number
   height: number
-  image: HTMLImageElement
   x: number
   y: number
 }
+
+export type CardData =
+  | (BaseOptions & {
+      type: Extract<CardType, 'image'>
+      image: HTMLImageElement
+    })
+  | (BaseOptions & {
+      type: Extract<CardType, 'text'>
+      text: string
+    })

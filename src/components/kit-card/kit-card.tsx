@@ -27,11 +27,12 @@ export class KitCard {
             width: this.data.width + 'px',
             height: this.data.height + 'px',
             transform: `translateX(${this.data.x}px) translateY(${this.data.y}px)`,
-            backgroundImage: `url(${this.data.image.src})`,
+            backgroundImage: `url(${this.data.type === 'image' ? this.data.image.src : ''})`,
             backgroundSize: '100% 100%',
+            backgroundRepeat: 'no-repeat',
           }}
         >
-          {/* 你的其他内容 */}
+          {this.data.type === 'text' ? <kit-svg data={this.data} /> : ''}
         </div>
       </div>
     )
