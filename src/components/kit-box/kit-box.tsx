@@ -50,9 +50,20 @@ export class MyComponent {
   @State() moveDataChangeCount = 0
 
   @Method()
-  public async init() {
+  public async init(list: CardData[] = []) {
     // 使用 designkitRef 获取 div.designkit 元素
     console.log('designkit div:', this.designkitRef)
+    this.domList = list
+    if (this.moveData.id) {
+      list.find((item) => {
+        if (item.id === this.moveData.id) {
+          this.moveData = {
+            ...item,
+          }
+          return true
+        }
+      })
+    }
   }
 
   @Method()

@@ -12,7 +12,7 @@ export namespace Components {
         "add": (data: CardData) => Promise<void>;
         "getDomList": () => Promise<CardData[]>;
         "height": number;
-        "init": () => Promise<void>;
+        "init": (list?: CardData[]) => Promise<void>;
         "updateCurrentData": (data: CardData) => Promise<void>;
         "width": number;
     }
