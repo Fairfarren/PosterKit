@@ -5,7 +5,6 @@ import iconDelete from '../../assets/icon/delete.svg'
 @Component({
   tag: 'kit-shortcut',
   styleUrl: 'kit-shortcut.css',
-  shadow: true,
 })
 export class KitShortcut {
   private menuList = [

@@ -4,7 +4,6 @@ import { CardData } from 'typing/index'
 @Component({
   tag: 'kit-move',
   styleUrl: 'kit-move.css',
-  shadow: true,
 })
 export class KitMove {
   private minWidth = 10

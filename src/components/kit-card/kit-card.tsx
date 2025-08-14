@@ -1,12 +1,13 @@
-import { Component, h, Prop } from '@stencil/core'
+import { Component, h, Prop, Element } from '@stencil/core'
 import { CardData } from 'typing/index'
 
 @Component({
   tag: 'kit-card',
   styleUrl: 'kit-card.css',
-  shadow: true,
 })
 export class KitCard {
+  @Element() el: HTMLElement
+
   @Prop()
   data: CardData
 

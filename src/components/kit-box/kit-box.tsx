@@ -18,11 +18,12 @@ import { CardData } from 'typing/index'
 @Component({
   tag: 'kit-box',
   styleUrl: 'kit-box.css',
-  shadow: true,
 })
 export class MyComponent {
   // 用于存储 designkit div 的引用
   private designkitRef?: HTMLDivElement
+  private cardRefs: HTMLKitCardElement[] = []
+
   @State() private zoom = 1
   @State() private previewWidth = 0
   @State() private previewHeight = 0
@@ -141,6 +142,58 @@ export class MyComponent {
     this.moveData = {
       ...data,
     }
+  }
+
+  @Method()
+  public async createPoster() {
+    const canvas = document.createElement('canvas')
+    canvas.width = this.width
+    canvas.height = this.height
+    const ctx = canvas.getContext('2d')
+
+    // 使用 Promise.all 来处理所有异步操作
+    const promises = this.domList.map(async (_item, index) => {
+      const item = {
+        ..._item,
+        width: _item.width / this.zoom,
+        height: _item.height / this.zoom,
+        x: _item.x / this.zoom,
+        y: _item.y / this.zoom,
+      }
+
+      if (item.type === 'image') {
+        ctx.drawImage(item.image, item.x, item.y, item.width, item.height)
+      } else if (item.type === 'text') {
+        const cardRef = this.cardRefs[index]
+        if (cardRef) {
+          const svgElement = cardRef.querySelector('svg')
+          if (svgElement) {
+            const svgDataUrl =
+              'data:image/svg+xml;charset=UTF-8,' +
+              encodeURIComponent(svgElement.outerHTML)
+
+            return new Promise<void>((resolve) => {
+              const img = new Image()
+              img.crossOrigin = 'anonymous'
+              img.onload = () => {
+                ctx.drawImage(img, item.x, item.y, item.width, item.height)
+                resolve()
+              }
+              img.onerror = () => {
+                console.error('Failed to load SVG image')
+                resolve()
+              }
+              img.src = svgDataUrl
+            })
+          }
+        }
+      }
+    })
+
+    // 等待所有图像加载完成
+    await Promise.all(promises)
+
+    return canvas
   }
 
   // 计算预览区域的尺寸和缩放比例
@@ -268,6 +321,7 @@ export class MyComponent {
           <div class="kit-list">
             {this.domList.map((item, index) => (
               <kit-card
+                ref={(el) => (this.cardRefs[index] = el)}
                 key={index}
                 data={item}
                 zoom={this.zoom}

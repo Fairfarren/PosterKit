@@ -98,7 +98,13 @@ export class KitSvg {
             </g>
           </defs>
 
-          <use xlinkHref={`#${this.data.id}`}></use>
+          <use
+            {...{
+              xlinkHref: `#${this.data.id}`,
+              // @ts-ignore
+              ['xmlns:xlink']: 'http://www.w3.org/1999/xlink',
+            }}
+          ></use>
         </svg>
       </div>
     )

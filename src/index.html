@@ -25,6 +25,15 @@
       .dataDiv {
         padding: 20px;
       }
+
+      .canvasPoster {
+        width: 500px;
+        height: 500px;
+        border: 2px solid black;
+        box-sizing: border-box;
+        margin-top: 20px;
+        object-fit: contain;
+      }
     </style>
   </head>
 
@@ -46,6 +55,9 @@
       <div>
         <button onclick="getList()">getList</button>
       </div>
+      <div>
+        <button onclick="createPoster()">create poster</button>
+      </div>
     </div>
 
     <div class="dataDiv">
@@ -55,6 +67,10 @@
       <div>
         <button onclick="updateCurrentData()">确定更改参数</button>
       </div>
+    </div>
+
+    <div>
+      <img class="canvasPoster" />
     </div>
   </body>
   <script>
@@ -157,9 +173,22 @@
           params[key] = value
         }
       })
+      const kitBox = document.querySelector('#kitBox')
       kitBox.updateCurrentData({
         ...currentData,
         ...params,
+      })
+    }
+
+    function createPoster() {
+      const kitBox = document.querySelector('#kitBox')
+      kitBox.createPoster().then((canvas) => {
+        console.log(canvas)
+        const img = document.querySelector('.canvasPoster')
+        img.src = canvas.toDataURL('image/png')
+        img.onload = () => {
+          URL.revokeObjectURL(img.src)
+        }
       })
     }
   </script>
