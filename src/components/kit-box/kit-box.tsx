@@ -151,8 +151,7 @@ export class MyComponent {
     canvas.height = this.height
     const ctx = canvas.getContext('2d')
 
-    // 使用 Promise.all 来处理所有异步操作
-    const promises = this.domList.map(async (_item, index) => {
+    for (const [index, _item] of this.domList.entries()) {
       const item = {
         ..._item,
         width: _item.width / this.zoom,
@@ -172,7 +171,7 @@ export class MyComponent {
               'data:image/svg+xml;charset=UTF-8,' +
               encodeURIComponent(svgElement.outerHTML)
 
-            return new Promise<void>((resolve) => {
+            await new Promise<void>((resolve) => {
               const img = new Image()
               img.crossOrigin = 'anonymous'
               img.onload = () => {
@@ -188,10 +187,7 @@ export class MyComponent {
           }
         }
       }
-    })
-
-    // 等待所有图像加载完成
-    await Promise.all(promises)
+    }
 
     return canvas
   }
