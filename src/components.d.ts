@@ -30,6 +30,13 @@ export namespace Components {
          */
         "zoom": number;
     }
+    interface KitShortcut {
+        "data": CardData;
+        /**
+          * @default 0
+         */
+        "moveY": number;
+    }
     interface KitSvg {
         "data": CardData;
     }
@@ -41,6 +48,10 @@ export interface KitBoxCustomEvent<T> extends CustomEvent<T> {
 export interface KitMoveCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLKitMoveElement;
+}
+export interface KitShortcutCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLKitShortcutElement;
 }
 declare global {
     interface HTMLKitBoxElementEventMap {
@@ -68,6 +79,9 @@ declare global {
     };
     interface HTMLKitMoveElementEventMap {
         "dataChanged": CardData;
+        "toUp": CardData;
+        "toDown": CardData;
+        "toDelete": CardData;
     }
     interface HTMLKitMoveElement extends Components.KitMove, HTMLStencilElement {
         addEventListener<K extends keyof HTMLKitMoveElementEventMap>(type: K, listener: (this: HTMLKitMoveElement, ev: KitMoveCustomEvent<HTMLKitMoveElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -83,6 +97,25 @@ declare global {
         prototype: HTMLKitMoveElement;
         new (): HTMLKitMoveElement;
     };
+    interface HTMLKitShortcutElementEventMap {
+        "toUp": CardData;
+        "toDown": CardData;
+        "toDelete": CardData;
+    }
+    interface HTMLKitShortcutElement extends Components.KitShortcut, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLKitShortcutElementEventMap>(type: K, listener: (this: HTMLKitShortcutElement, ev: KitShortcutCustomEvent<HTMLKitShortcutElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLKitShortcutElementEventMap>(type: K, listener: (this: HTMLKitShortcutElement, ev: KitShortcutCustomEvent<HTMLKitShortcutElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLKitShortcutElement: {
+        prototype: HTMLKitShortcutElement;
+        new (): HTMLKitShortcutElement;
+    };
     interface HTMLKitSvgElement extends Components.KitSvg, HTMLStencilElement {
     }
     var HTMLKitSvgElement: {
@@ -93,6 +126,7 @@ declare global {
         "kit-box": HTMLKitBoxElement;
         "kit-card": HTMLKitCardElement;
         "kit-move": HTMLKitMoveElement;
+        "kit-shortcut": HTMLKitShortcutElement;
         "kit-svg": HTMLKitSvgElement;
     }
 }
@@ -112,10 +146,23 @@ declare namespace LocalJSX {
     interface KitMove {
         "data"?: CardData;
         "onDataChanged"?: (event: KitMoveCustomEvent<CardData>) => void;
+        "onToDelete"?: (event: KitMoveCustomEvent<CardData>) => void;
+        "onToDown"?: (event: KitMoveCustomEvent<CardData>) => void;
+        "onToUp"?: (event: KitMoveCustomEvent<CardData>) => void;
         /**
           * @default 1
          */
         "zoom"?: number;
+    }
+    interface KitShortcut {
+        "data"?: CardData;
+        /**
+          * @default 0
+         */
+        "moveY"?: number;
+        "onToDelete"?: (event: KitShortcutCustomEvent<CardData>) => void;
+        "onToDown"?: (event: KitShortcutCustomEvent<CardData>) => void;
+        "onToUp"?: (event: KitShortcutCustomEvent<CardData>) => void;
     }
     interface KitSvg {
         "data"?: CardData;
@@ -124,6 +171,7 @@ declare namespace LocalJSX {
         "kit-box": KitBox;
         "kit-card": KitCard;
         "kit-move": KitMove;
+        "kit-shortcut": KitShortcut;
         "kit-svg": KitSvg;
     }
 }
@@ -134,6 +182,7 @@ declare module "@stencil/core" {
             "kit-box": LocalJSX.KitBox & JSXBase.HTMLAttributes<HTMLKitBoxElement>;
             "kit-card": LocalJSX.KitCard & JSXBase.HTMLAttributes<HTMLKitCardElement>;
             "kit-move": LocalJSX.KitMove & JSXBase.HTMLAttributes<HTMLKitMoveElement>;
+            "kit-shortcut": LocalJSX.KitShortcut & JSXBase.HTMLAttributes<HTMLKitShortcutElement>;
             "kit-svg": LocalJSX.KitSvg & JSXBase.HTMLAttributes<HTMLKitSvgElement>;
         }
     }

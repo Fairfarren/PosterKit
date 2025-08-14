@@ -24,6 +24,13 @@ export class KitMove {
     this.dataChanged.emit(data)
   }
 
+  @Event()
+  toUp: EventEmitter<CardData>
+  @Event()
+  toDown: EventEmitter<CardData>
+  @Event()
+  toDelete: EventEmitter<CardData>
+
   private startX = 0
   private startY = 0
   private startWidth = 0
@@ -175,6 +182,7 @@ export class KitMove {
           }}
           onMouseDown={this.handleCardMouseDown}
         >
+          <kit-shortcut moveY={this.data.y} data={this.data} />
           {/* 8个缩放控制点 */}
           <div
             class="resize-handle nw"

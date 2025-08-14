@@ -205,9 +205,50 @@ export class MyComponent {
     }
   }
 
-  private clearMoveData = (e) => {
-    e.stopPropagation()
+  private clearMoveData = (e?) => {
+    e?.stopPropagation()
     this.onDataChanged({})
+  }
+
+  private moveLayer = (cardData: CardData, direction: 'up' | 'down') => {
+    const index = this.domList.findIndex((item) => item.id === cardData.id)
+    let targetIndex: number
+
+    if (direction === 'up') {
+      // 上移一层与后一个元素交换位置
+      targetIndex = index + 1
+      if (targetIndex >= this.domList.length) {
+        return
+      } // 已经在最上层
+    } else {
+      // 下移一层：与前一个元素交换位置
+      targetIndex = index - 1
+      if (targetIndex < 0) {
+        return
+      } // 已经在最下层
+    }
+
+    const newList = [...this.domList]
+    const temp = newList[targetIndex]
+    newList[targetIndex] = newList[index]
+    newList[index] = temp
+    this.domList = newList
+  }
+
+  private toUp = (e: CardData) => {
+    this.moveLayer(e, 'up')
+  }
+
+  private toDown = (e: CardData) => {
+    this.moveLayer(e, 'down')
+  }
+
+  private toDelete = (e: CardData) => {
+    // 删除当前卡片
+    this.domList = this.domList.filter((item) => item.id !== e.id)
+    if (this.moveData.id === e.id) {
+      this.clearMoveData()
+    }
   }
 
   render() {
@@ -245,6 +286,9 @@ export class MyComponent {
                 this.onDataChanged.call(this, data.detail)
               }
               onClick={(e) => e.stopPropagation()}
+              onToUp={(e) => this.toUp(e.detail)}
+              onToDown={(e) => this.toDown(e.detail)}
+              onToDelete={(e) => this.toDelete(e.detail)}
             />
           )}
         </div>
