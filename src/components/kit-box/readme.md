@@ -1,9 +1,6 @@
 # kit-box
 
-
-
 <!-- Auto Generated Below -->
-
 
 ## Properties
 
@@ -12,19 +9,15 @@
 | `height` | `height`  |             | `number` | `undefined` |
 | `width`  | `width`   |             | `number` | `undefined` |
 
-
 ## Events
 
 | Event               | Description | Type                                                                                                                                                                                                                                                                                     |
 | ------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `currentDataChange` |             | `CustomEvent<BaseOptions & { type: "image"; image: HTMLImageElement; } \| BaseOptions & { type: "text"; text: string; fontSize: number; fontFamily: string; color: string; fontWeight: string; fontStyle: "normal" \| "italic"; decoration: "none" \| "underline" \| "line-through"; }>` |
 
-
 ## Methods
 
 ### `add(data: CardData) => Promise<void>`
-
-
 
 #### Parameters
 
@@ -36,31 +29,19 @@
 
 Type: `Promise<void>`
 
-
-
 ### `createPoster() => Promise<HTMLCanvasElement>`
-
-
 
 #### Returns
 
 Type: `Promise<HTMLCanvasElement>`
 
-
-
 ### `getDomList() => Promise<CardData[]>`
-
-
 
 #### Returns
 
 Type: `Promise<CardData[]>`
 
-
-
 ### `init(list?: CardData[]) => Promise<void>`
-
-
 
 #### Parameters
 
@@ -72,11 +53,7 @@ Type: `Promise<CardData[]>`
 
 Type: `Promise<void>`
 
-
-
 ### `updateCurrentData(data: CardData) => Promise<void>`
-
-
 
 #### Parameters
 
@@ -88,9 +65,6 @@ Type: `Promise<void>`
 
 Type: `Promise<void>`
 
-
-
-
 ## Dependencies
 
 ### Depends on
@@ -99,6 +73,7 @@ Type: `Promise<void>`
 - [kit-move](../kit-move)
 
 ### Graph
+
 ```mermaid
 graph TD;
   kit-box --> kit-card
@@ -108,6 +83,6 @@ graph TD;
   style kit-box fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
-----------------------------------------------
+---
 
-*Built with [StencilJS](https://stenciljs.com/)*
+_Built with [StencilJS](https://stenciljs.com/)_
