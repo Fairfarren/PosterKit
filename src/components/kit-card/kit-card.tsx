@@ -4,6 +4,7 @@ import { CardData } from 'typing/index'
 @Component({
   tag: 'kit-card',
   styleUrl: 'kit-card.css',
+  shadow: true,
 })
 export class KitCard {
   @Prop()

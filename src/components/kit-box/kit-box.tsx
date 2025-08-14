@@ -18,6 +18,7 @@ import { CardData } from 'typing/index'
 @Component({
   tag: 'kit-box',
   styleUrl: 'kit-box.css',
+  shadow: true,
 })
 export class MyComponent {
   // 用于存储 designkit div 的引用
@@ -82,9 +83,17 @@ export class MyComponent {
 
   @Method()
   public async init(list: CardData[] = []) {
-    this.domList = list
+    this.domList = list.map((item) => {
+      return {
+        ...item,
+        width: item.width * this.zoom,
+        height: item.height * this.zoom,
+        x: item.x * this.zoom,
+        y: item.y * this.zoom,
+      }
+    })
     if (this.moveData.id) {
-      list.find((item) => {
+      this.domList.find((item) => {
         if (item.id === this.moveData.id) {
           this.moveData = {
             ...item,
