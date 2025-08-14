@@ -10,11 +10,6 @@ import {
 } from '@stencil/core'
 import { CardData } from 'typing/index'
 
-// const imgList = [
-//   'https://remember-quick.oss-cn-chengdu.aliyuncs.com/avatar/default_avatar.png',
-//   'https://material-center.meitudata.com/material/image/62fa22ac354485399.png'
-// ]
-
 @Component({
   tag: 'kit-box',
   styleUrl: 'kit-box.css',
