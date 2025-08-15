@@ -19,6 +19,7 @@
   },
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/designkit/designkit.esm.js",
       "require": "./dist/designkit/designkit.cjs.js"
     },

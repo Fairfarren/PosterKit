@@ -18,12 +18,9 @@ export const config: Config = {
       type: 'www',
       serviceWorker: null, // disable service workers
     },
-    /* ② 供 React 使用的包装器 */
     reactOutputTarget({
       outDir: './dist/react/',
     }),
-
-    /* ③ 供 Vue 使用的包装器 */
     vueOutputTarget({
       componentCorePackage: 'designkit',
       proxiesFile: './dist/vue/index.ts',
