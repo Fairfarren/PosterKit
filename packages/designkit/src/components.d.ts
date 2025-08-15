@@ -5,8 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { CardData } from "../typing/index.d";
-export { CardData } from "../typing/index.d";
+import { CardData } from "./typing/index.d";
+export { CardData } from "./typing/index.d";
 export namespace Components {
     interface KitBox {
         "add": (data: CardData) => Promise<void>;

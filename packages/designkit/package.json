@@ -1,21 +1,30 @@
 {
   "name": "designkit",
   "version": "0.0.1",
-  "description": "Stencil Component Starter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stenciljs/component-starter.git"
+  },
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
-  "types": "dist/types/index.d.ts",
-  "collection": "dist/collection/collection-manifest.json",
-  "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/designkit/designkit.esm.js",
+  "devDependencies": {
+    "@stencil/core": "^4.27.1",
+    "@stencil/react-output-target": "^1.2.0",
+    "@stencil/vue-output-target": "^0.11.8",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.5",
+    "jest": "^29.7.0",
+    "jest-cli": "^29.7.0",
+    "puppeteer": "^24.3.0"
+  },
   "exports": {
     ".": {
       "import": "./dist/designkit/designkit.esm.js",
       "require": "./dist/designkit/designkit.cjs.js"
     },
-    "./my-component": {
-      "import": "./dist/components/my-component.js",
-      "types": "./dist/components/my-component.d.ts"
+    "./dist/*": {
+      "import": "./dist/*",
+      "types": "./dist/*"
     },
     "./loader": {
       "import": "./loader/index.js",
@@ -23,14 +32,14 @@
       "types": "./loader/index.d.ts"
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/stenciljs/component-starter.git"
-  },
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "description": "Stencil Component Starter",
   "files": [
     "dist/",
     "loader/"
   ],
+  "license": "MIT",
   "scripts": {
     "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
@@ -40,16 +49,6 @@
     "lint": "oxlint --fix",
     "format": "prettier --write src/"
   },
-  "devDependencies": {
-    "@stencil/core": "^4.27.1",
-    "@types/jest": "^29.5.14",
-    "@types/node": "^22.13.5",
-    "jest": "^29.7.0",
-    "jest-cli": "^29.7.0",
-    "puppeteer": "^24.3.0",
-    "@prettier/plugin-oxc": "^0.0.4",
-    "oxlint": "^1.6.0",
-    "prettier": "^3.6.2"
-  },
-  "license": "MIT"
+  "types": "dist/types/index.d.ts",
+  "unpkg": "dist/designkit/designkit.esm.js"
 }

@@ -1,11 +1,12 @@
 {
-  "name": "designkit",
+  "name": "designkit-monorepo",
   "private": true,
-  "scripts": {
-    "check-types": "turbo run check-types"
-  },
+  "scripts": { },
   "devDependencies": {
-    "turbo": "^2.5.5"
+    "turbo": "^2.5.5",
+    "@prettier/plugin-oxc": "^0.0.4",
+    "oxlint": "^1.6.0",
+    "prettier": "^3.6.2"
   },
   "engines": {
     "node": ">=18"

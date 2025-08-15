@@ -1,5 +1,5 @@
 import { Event, Prop, Component, h, EventEmitter } from '@stencil/core'
-import { CardData } from 'typing/index'
+import { CardData } from '@/typing/index.d'
 import iconDelete from '../../assets/icon/delete.svg'
 
 @Component({
