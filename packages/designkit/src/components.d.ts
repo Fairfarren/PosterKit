@@ -57,6 +57,7 @@ export interface KitShortcutCustomEvent<T> extends CustomEvent<T> {
 declare global {
     interface HTMLKitBoxElementEventMap {
         "currentDataChange": CardData;
+        "current-data-change": CardData;
     }
     interface HTMLKitBoxElement extends Components.KitBox, HTMLStencilElement {
         addEventListener<K extends keyof HTMLKitBoxElementEventMap>(type: K, listener: (this: HTMLKitBoxElement, ev: KitBoxCustomEvent<HTMLKitBoxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -134,6 +135,7 @@ declare global {
 declare namespace LocalJSX {
     interface KitBox {
         "height"?: number;
+        "onCurrent-data-change"?: (event: KitBoxCustomEvent<CardData>) => void;
         "onCurrentDataChange"?: (event: KitBoxCustomEvent<CardData>) => void;
         "width"?: number;
     }

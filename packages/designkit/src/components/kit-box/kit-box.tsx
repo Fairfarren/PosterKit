@@ -26,9 +26,15 @@ export class MyComponent {
   @Prop() width: number
   @Prop() height: number
 
+  // React 侧沿用 camelCase 名称
   @Event() currentDataChange: EventEmitter<CardData>
+  // Vue 侧使用 kebab-case 名称
+  @Event({ eventName: 'current-data-change', bubbles: true, composed: true })
+  currentDataChangeKebab: EventEmitter<CardData>
   dataOnChange(data: CardData) {
+    // 同时派发两个事件，保证向后兼容
     this.currentDataChange.emit(data)
+    this.currentDataChangeKebab.emit(data)
   }
 
   @State() domList: CardData[] = []
@@ -201,7 +207,7 @@ export class MyComponent {
     const scaleX = containerWidth / this.width
     const scaleY = containerHeight / this.height
 
-    // 取较小的缩放比例，确保内容完全显示在容器内
+    // 取较小的缩放比例，确保内容完��显示在容器内
     this.zoom = Math.min(scaleX, scaleY, 1) // 最大不超过 1（100%）
 
     // 计算预览区域的实际尺寸
@@ -228,7 +234,7 @@ export class MyComponent {
     window.removeEventListener('resize', this.resizeHandler)
   }
 
-  // 处理卡片点击的回调函数
+  // 处理卡片点击的调函数
   private handleCardClick = (cardData: CardData) => {
     this.moveData = {
       ...cardData,

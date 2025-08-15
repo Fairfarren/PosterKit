@@ -5,7 +5,7 @@
         ref="kitBoxRef"
         :width="1080"
         :height="1920"
-        @onCurrentDataChange="currentDataChange"
+        @currentDataChange="currentDataChange"
       />
     </div>
     <div>
@@ -18,17 +18,21 @@
       <button @click="createPoster">生成海报</button>
     </div>
     <div v-if="currentData?.id">
-      <div key="{key}" v-for="[key, value] in Object.entries(currentData)">
+      <div :key="key" v-for="[key, value] in Object.entries(currentData)">
         {{ key }}:
         <input
           type="text"
-          :value="value"
+          :value="String(value)"
           :disabled="['id', 'type', 'image'].includes(key)"
-          @Change="updateData"
+          @input="
+            updateData({
+              ...currentData,
+              [key]: $event.target.value,
+            })
+          "
         />
       </div>
     </div>
-    )}
     <div>
       <img
         :style="{
@@ -52,8 +56,6 @@ const currentData = ref<CardData | null>(null)
 const url = ref('')
 
 function currentDataChange(e: CustomEvent<CardData>) {
-  // e.detail 即为 CardData
-  console.log('currentDataChange', e.detail)
   currentData.value = e.detail
 }
 
@@ -83,8 +85,7 @@ function createPoster() {
   kitBoxRef.value
     ?.createPoster()
     .then((canvas) => {
-      const src = canvas.toDataURL('image/png')
-      url.value = src
+      url.value = canvas.toDataURL('image/png')
     })
     .catch((err) => {
       console.error('Error creating poster:', err)

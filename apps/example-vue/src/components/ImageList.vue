@@ -25,7 +25,10 @@ const imageAssets = [
 const list = ref<CardData[]>([])
 
 function add(data: CardData) {
-  emits('add', data)
+  emits('add', {
+    ...data,
+    id: Math.random().toString(36),
+  })
 }
 
 async function init() {
