@@ -2,6 +2,8 @@
 
 海报编辑工具
 
+在线地址: [https://fairfarren.github.io/PosterKit/](https://fairfarren.github.io/PosterKit/)
+
 可自己规划文字的字体、大小、颜色等样式。
 
 - [x] 删除内容
