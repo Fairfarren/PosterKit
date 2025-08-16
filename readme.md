@@ -10,7 +10,7 @@
 
 - [x] gitHub action 自动部署
 
-- [ ] react / vue 的用例
+- [x] react / vue 的用例
 
 - [ ] 文档
 
