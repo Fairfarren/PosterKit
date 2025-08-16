@@ -1,4 +1,4 @@
-import type { CardData } from 'designkit/dist/types/index.d.ts'
+import type { CardData } from 'designkit'
 import { useEffect, useState } from 'react'
 
 const imageAssets = [

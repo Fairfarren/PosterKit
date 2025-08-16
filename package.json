@@ -13,7 +13,8 @@
   },
   "packageManager": "bun@1.2.17",
   "workspaces": [
-    "apps/*",
+    "example/*",
+    "docs/*",
     "packages/*"
   ]
 }
