@@ -4,6 +4,7 @@ import { vueOutputTarget } from '@stencil/vue-output-target'
 
 export const config: Config = {
   namespace: 'poster-kit',
+  sourceMap: false,
   outputTargets: [
     {
       type: 'dist',
