@@ -24,6 +24,7 @@ export const config: Config = {
     vueOutputTarget({
       componentCorePackage: 'designkit',
       proxiesFile: './dist/vue/index.ts',
+      includeDefineCustomElements: true,
     }),
   ],
   testing: {

@@ -27,7 +27,7 @@
           @input="
             updateData({
               ...currentData,
-              [key]: $event.target.value,
+              [key]: $event.target?.value,
             })
           "
         />
