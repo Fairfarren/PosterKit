@@ -4,6 +4,12 @@ import { pluginBabel } from '@rsbuild/plugin-babel'
 import { pluginVueJsx } from '@rsbuild/plugin-vue-jsx'
 
 export default defineConfig({
+  html: {
+    title: 'poster-kit example vue',
+  },
+  output: {
+    assetPrefix: './',
+  },
   plugins: [
     pluginBabel({
       include: /\.(?:jsx|tsx)$/,

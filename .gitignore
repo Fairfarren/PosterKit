@@ -1,6 +1,9 @@
 dist/
 www/
 loader/
+pages/react
+pages/www
+pages/vue
 
 *~
 *.sw[mnpcod]
