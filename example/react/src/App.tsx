@@ -1,6 +1,6 @@
 import './App.css'
-import { KitBox } from 'designkit/dist/react/components.ts'
-import type { CardData } from 'designkit'
+import { KitBox } from 'poster-kit/dist/react/components.ts'
+import type { CardData } from 'poster-kit'
 import { useRef, type ComponentRef, useState } from 'react'
 import ImageList from './components/ImageList.tsx'
 

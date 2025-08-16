@@ -1,4 +1,4 @@
-import type { CardData } from 'designkit'
+import type { CardData } from 'poster-kit'
 import { useEffect, useState } from 'react'
 
 const imageAssets = [

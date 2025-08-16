@@ -3,7 +3,7 @@ import { reactOutputTarget } from '@stencil/react-output-target'
 import { vueOutputTarget } from '@stencil/vue-output-target'
 
 export const config: Config = {
-  namespace: 'designkit',
+  namespace: 'poster-kit',
   outputTargets: [
     {
       type: 'dist',
@@ -22,7 +22,7 @@ export const config: Config = {
       outDir: './dist/react/',
     }),
     vueOutputTarget({
-      componentCorePackage: 'designkit',
+      componentCorePackage: 'poster-kit',
       proxiesFile: './dist/vue/index.ts',
       includeDefineCustomElements: true,
     }),

@@ -47,7 +47,7 @@
   </div>
 </template>
 <script setup lang="tsx">
-import type { CardData } from 'designkit'
+import type { CardData } from 'poster-kit'
 import { ref } from 'vue'
 import ImageList from './components/ImageList.vue'
 

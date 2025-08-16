@@ -1,5 +1,5 @@
 {
-  "name": "designkit",
+  "name": "poster-kit",
   "version": "0.0.1",
   "repository": {
     "type": "git",
@@ -20,8 +20,8 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/designkit/designkit.esm.js",
-      "require": "./dist/designkit/designkit.cjs.js"
+      "import": "./dist/posterKit/posterKit.esm.js",
+      "require": "./dist/posterKit/posterKit.cjs.js"
     },
     "./dist/*": {
       "import": "./dist/*",
@@ -51,5 +51,5 @@
     "format": "prettier --write src/"
   },
   "types": "dist/types/index.d.ts",
-  "unpkg": "dist/designkit/designkit.esm.js"
+  "unpkg": "dist/posterKit/posterKit.esm.js"
 }

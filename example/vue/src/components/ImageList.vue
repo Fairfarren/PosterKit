@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, defineEmits } from 'vue'
-import type { CardData } from 'designkit'
+import type { CardData } from 'poster-kit'
 
 const emits = defineEmits({
   add: (_data: CardData) => true,
