@@ -1,5 +1,5 @@
 /// <reference types="@rsbuild/core/types" />
-/// <reference types="designkit" />
+/// <reference types="packages/posterKit" />
 
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
