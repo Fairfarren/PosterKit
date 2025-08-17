@@ -103,6 +103,7 @@ declare global {
         "toUp": CardData;
         "toDown": CardData;
         "toDelete": CardData;
+        "dataChanged": CardData;
     }
     interface HTMLKitShortcutElement extends Components.KitShortcut, HTMLStencilElement {
         addEventListener<K extends keyof HTMLKitShortcutElementEventMap>(type: K, listener: (this: HTMLKitShortcutElement, ev: KitShortcutCustomEvent<HTMLKitShortcutElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -163,6 +164,7 @@ declare namespace LocalJSX {
           * @default 0
          */
         "moveY"?: number;
+        "onDataChanged"?: (event: KitShortcutCustomEvent<CardData>) => void;
         "onToDelete"?: (event: KitShortcutCustomEvent<CardData>) => void;
         "onToDown"?: (event: KitShortcutCustomEvent<CardData>) => void;
         "onToUp"?: (event: KitShortcutCustomEvent<CardData>) => void;
