@@ -130,7 +130,7 @@ export class KitMove {
       switch (this.resizeDirection) {
         case 'nw':
           primaryDelta = Math.max(-deltaX, -deltaY)
-          newWidth = Math.max(this.minWidth, this.startWidth - primaryDelta)
+          newWidth = Math.max(this.minWidth, this.startWidth + primaryDelta)
           newHeight = Math.max(this.minWidth, newWidth / aspectRatio)
           newX = this.startCardX + (this.startWidth - newWidth)
           newY = this.startCardY + (this.startHeight - newHeight)
@@ -148,7 +148,7 @@ export class KitMove {
           break
         case 'sw':
           primaryDelta = Math.max(-deltaX, deltaY)
-          newWidth = Math.max(this.minWidth, this.startWidth - primaryDelta)
+          newWidth = Math.max(this.minWidth, this.startWidth + primaryDelta)
           newHeight = Math.max(this.minWidth, newWidth / aspectRatio)
           newX = this.startCardX + (this.startWidth - newWidth)
           break
