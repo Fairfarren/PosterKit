@@ -117,41 +117,80 @@ export class KitMove {
     let newX = this.startCardX
     let newY = this.startCardY
 
-    switch (this.resizeDirection) {
-      case 'nw':
-        newWidth = Math.max(this.minWidth, this.startWidth - deltaX)
-        newHeight = Math.max(this.minWidth, this.startHeight - deltaY)
-        newX = this.startCardX + (this.startWidth - newWidth)
-        newY = this.startCardY + (this.startHeight - newHeight)
-        break
-      case 'n':
-        newHeight = Math.max(this.minWidth, this.startHeight - deltaY)
-        newY = this.startCardY + (this.startHeight - newHeight)
-        break
-      case 'ne':
-        newWidth = Math.max(this.minWidth, this.startWidth + deltaX)
-        newHeight = Math.max(this.minWidth, this.startHeight - deltaY)
-        newY = this.startCardY + (this.startHeight - newHeight)
-        break
-      case 'e':
-        newWidth = Math.max(this.minWidth, this.startWidth + deltaX)
-        break
-      case 'se':
-        newWidth = Math.max(this.minWidth, this.startWidth + deltaX)
-        newHeight = Math.max(this.minWidth, this.startHeight + deltaY)
-        break
-      case 's':
-        newHeight = Math.max(this.minWidth, this.startHeight + deltaY)
-        break
-      case 'sw':
-        newWidth = Math.max(this.minWidth, this.startWidth - deltaX)
-        newHeight = Math.max(this.minWidth, this.startHeight + deltaY)
-        newX = this.startCardX + (this.startWidth - newWidth)
-        break
-      case 'w':
-        newWidth = Math.max(this.minWidth, this.startWidth - deltaX)
-        newX = this.startCardX + (this.startWidth - newWidth)
-        break
+    // 如果 isLock 为 true，角落的缩放点需要等比例缩放
+    if (
+      this.data.isLock &&
+      ['nw', 'ne', 'se', 'sw'].includes(this.resizeDirection)
+    ) {
+      // 计算原始宽高比
+      const aspectRatio = this.startWidth / this.startHeight
+
+      // 根据拖拽方向选择主要的变化量
+      let primaryDelta = 0
+      switch (this.resizeDirection) {
+        case 'nw':
+          primaryDelta = Math.max(-deltaX, -deltaY)
+          newWidth = Math.max(this.minWidth, this.startWidth - primaryDelta)
+          newHeight = Math.max(this.minWidth, newWidth / aspectRatio)
+          newX = this.startCardX + (this.startWidth - newWidth)
+          newY = this.startCardY + (this.startHeight - newHeight)
+          break
+        case 'ne':
+          primaryDelta = Math.max(deltaX, -deltaY)
+          newWidth = Math.max(this.minWidth, this.startWidth + primaryDelta)
+          newHeight = Math.max(this.minWidth, newWidth / aspectRatio)
+          newY = this.startCardY + (this.startHeight - newHeight)
+          break
+        case 'se':
+          primaryDelta = Math.max(deltaX, deltaY)
+          newWidth = Math.max(this.minWidth, this.startWidth + primaryDelta)
+          newHeight = Math.max(this.minWidth, newWidth / aspectRatio)
+          break
+        case 'sw':
+          primaryDelta = Math.max(-deltaX, deltaY)
+          newWidth = Math.max(this.minWidth, this.startWidth - primaryDelta)
+          newHeight = Math.max(this.minWidth, newWidth / aspectRatio)
+          newX = this.startCardX + (this.startWidth - newWidth)
+          break
+      }
+    } else {
+      // 原有的缩放逻辑
+      switch (this.resizeDirection) {
+        case 'nw':
+          newWidth = Math.max(this.minWidth, this.startWidth - deltaX)
+          newHeight = Math.max(this.minWidth, this.startHeight - deltaY)
+          newX = this.startCardX + (this.startWidth - newWidth)
+          newY = this.startCardY + (this.startHeight - newHeight)
+          break
+        case 'n':
+          newHeight = Math.max(this.minWidth, this.startHeight - deltaY)
+          newY = this.startCardY + (this.startHeight - newHeight)
+          break
+        case 'ne':
+          newWidth = Math.max(this.minWidth, this.startWidth + deltaX)
+          newHeight = Math.max(this.minWidth, this.startHeight - deltaY)
+          newY = this.startCardY + (this.startHeight - newHeight)
+          break
+        case 'e':
+          newWidth = Math.max(this.minWidth, this.startWidth + deltaX)
+          break
+        case 'se':
+          newWidth = Math.max(this.minWidth, this.startWidth + deltaX)
+          newHeight = Math.max(this.minWidth, this.startHeight + deltaY)
+          break
+        case 's':
+          newHeight = Math.max(this.minWidth, this.startHeight + deltaY)
+          break
+        case 'sw':
+          newWidth = Math.max(this.minWidth, this.startWidth - deltaX)
+          newHeight = Math.max(this.minWidth, this.startHeight + deltaY)
+          newX = this.startCardX + (this.startWidth - newWidth)
+          break
+        case 'w':
+          newWidth = Math.max(this.minWidth, this.startWidth - deltaX)
+          newX = this.startCardX + (this.startWidth - newWidth)
+          break
+      }
     }
 
     this.setData({
@@ -182,39 +221,46 @@ export class KitMove {
           onMouseDown={this.handleCardMouseDown}
         >
           <kit-shortcut moveY={this.data.y} data={this.data} />
-          {/* 8个缩放控制点 */}
+          {/* 缩放控制点 */}
+          {/* 四个角的缩放点，始终显示 */}
           <div
             class="resize-handle nw"
             onMouseDown={(e) => this.handleResizeMouseDown(e, 'nw')}
-          ></div>
-          <div
-            class="resize-handle n"
-            onMouseDown={(e) => this.handleResizeMouseDown(e, 'n')}
           ></div>
           <div
             class="resize-handle ne"
             onMouseDown={(e) => this.handleResizeMouseDown(e, 'ne')}
           ></div>
           <div
-            class="resize-handle e"
-            onMouseDown={(e) => this.handleResizeMouseDown(e, 'e')}
-          ></div>
-          <div
             class="resize-handle se"
             onMouseDown={(e) => this.handleResizeMouseDown(e, 'se')}
-          ></div>
-          <div
-            class="resize-handle s"
-            onMouseDown={(e) => this.handleResizeMouseDown(e, 's')}
           ></div>
           <div
             class="resize-handle sw"
             onMouseDown={(e) => this.handleResizeMouseDown(e, 'sw')}
           ></div>
-          <div
-            class="resize-handle w"
-            onMouseDown={(e) => this.handleResizeMouseDown(e, 'w')}
-          ></div>
+
+          {/* 上下左右的缩放点，只有在 isLock 为 false 时才显示 */}
+          {!this.data.isLock && (
+            <>
+              <div
+                class="resize-handle n"
+                onMouseDown={(e) => this.handleResizeMouseDown(e, 'n')}
+              ></div>
+              <div
+                class="resize-handle e"
+                onMouseDown={(e) => this.handleResizeMouseDown(e, 'e')}
+              ></div>
+              <div
+                class="resize-handle s"
+                onMouseDown={(e) => this.handleResizeMouseDown(e, 's')}
+              ></div>
+              <div
+                class="resize-handle w"
+                onMouseDown={(e) => this.handleResizeMouseDown(e, 'w')}
+              ></div>
+            </>
+          )}
         </div>
       </div>
     )

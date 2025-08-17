@@ -6,6 +6,7 @@ interface BaseOptions {
   height: number
   x: number
   y: number
+  isLock?: boolean
 }
 
 export type CardData =
