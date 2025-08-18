@@ -6,9 +6,7 @@ rm -rf ./pages/www
 
 cd packages/posterKit
 bun run build
-cd ../../
-bun install
-cd ./example/react
+cd ../../example/react
 bun run build
 cd ../vue
 bun run build

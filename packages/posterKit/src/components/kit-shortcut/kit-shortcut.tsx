@@ -2,7 +2,7 @@ import { Event, Prop, Component, h, EventEmitter } from '@stencil/core'
 import { CardData } from '@/typing/index.d'
 import iconDelete from '../../assets/icon/delete.svg'
 import iconLock from '../../assets/icon/lock.svg'
-import iconUnLock from '../../assets/icon/unLock.svg'
+import iconUnLock from '../../assets/icon/unlock.svg'
 
 @Component({
   tag: 'kit-shortcut',
