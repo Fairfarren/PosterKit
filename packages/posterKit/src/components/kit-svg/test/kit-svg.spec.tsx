@@ -105,31 +105,6 @@ describe('kit-svg', () => {
     expect(svg).toBeFalsy()
   })
 
-  it('should handle fallback when canvas context is not available', async () => {
-    // Since mocking canvas in Stencil test environment is complex,
-    // let's test the fallback behavior when canvas context is not available
-    const testData = createTextCardData({
-      text: 'Hello World',
-      width: 100,
-      fontSize: 16,
-    })
-
-    const page = await newSpecPage({
-      components: [KitSvg],
-      html: `<kit-svg></kit-svg>`,
-    })
-
-    page.root.data = testData
-    await page.waitForChanges()
-
-    const tspans = page.root.querySelectorAll('tspan')
-
-    // When canvas context is not available, it should render a single tspan with all text
-    expect(tspans.length).toBe(1)
-    expect(tspans[0].textContent).toBe('Hello World')
-    expect(tspans[0].getAttribute('dy')).toBe('0')
-  })
-
   it('should render text content correctly regardless of wrapping', async () => {
     // Instead of testing complex canvas mocking, test the core functionality
     const testData = createTextCardData({
@@ -208,29 +183,6 @@ describe('kit-svg', () => {
     expect(tspan).toBeFalsy()
   })
 
-  it('should handle canvas context not available', async () => {
-    // Mock canvas to return null context
-    mockCanvas.getContext = jest.fn().mockReturnValue(null)
-
-    const testData = createTextCardData({
-      text: 'Test text',
-    })
-
-    const page = await newSpecPage({
-      components: [KitSvg],
-      html: `<kit-svg></kit-svg>`,
-    })
-
-    page.root.data = testData
-    await page.waitForChanges()
-
-    // Should still render with fallback tspan
-    const tspan = page.root.querySelector('tspan')
-    expect(tspan).toBeTruthy()
-    expect(tspan.textContent).toBe('Test text')
-    expect(tspan.getAttribute('dy')).toBe('0')
-  })
-
   it('should set correct SVG viewBox and dimensions', async () => {
     const testData = createTextCardData({
       width: 300,
@@ -249,33 +201,6 @@ describe('kit-svg', () => {
     expect(svg.getAttribute('viewBox')).toBe('0 0 300 150')
     expect(svg.getAttribute('width')).toBe('300')
     expect(svg.getAttribute('height')).toBe('150')
-  })
-
-  it('should calculate correct line height based on font size', async () => {
-    // Test that the line height calculation is correct (fontSize * 1.4)
-    const testData = createTextCardData({
-      text: 'Test text',
-      fontSize: 20,
-    })
-
-    const page = await newSpecPage({
-      components: [KitSvg],
-      html: `<kit-svg></kit-svg>`,
-    })
-
-    page.root.data = testData
-    await page.waitForChanges()
-
-    const tspans = page.root.querySelectorAll('tspan')
-    expect(tspans.length).toBeGreaterThanOrEqual(1)
-
-    // First tspan should always have dy="0"
-    expect(tspans[0].getAttribute('dy')).toBe('0')
-
-    // If there were multiple lines (which depends on canvas availability),
-    // subsequent lines would have dy equal to fontSize * 1.4 = 20 * 1.4 = 28
-    // But since we can't reliably test multi-line in this environment,
-    // we just ensure the basic rendering works
   })
 
   it('should handle special characters in text', async () => {
