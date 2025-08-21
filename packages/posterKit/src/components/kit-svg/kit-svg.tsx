@@ -10,14 +10,14 @@ export class KitSvg {
 
   // 文本换行处理方法
   private renderTextWithLineBreaks() {
-    if (this.data.type !== 'text') {
+    if (!this.data || this.data.type !== 'text') {
       return null
     }
 
-    const text = this.data.text
-    const maxWidth = this.data.width - this.data.fontSize * 0.2 // 留出一些边距
-    const lineHeight = this.data.fontSize * 1.4 // 行高
-    const fontSize = this.data.fontSize
+    const text = this.data.text || ''
+    const fontSize = this.data.fontSize || 16
+    const maxWidth = (this.data.width || 0) - fontSize * 0.2 // 留出一些边距
+    const lineHeight = fontSize * 1.4 // 行高
 
     // 创建临时 canvas 来测量文本宽度
     const canvas = document.createElement('canvas')
@@ -32,7 +32,7 @@ export class KitSvg {
 
     ctx.font = `${this.data.fontStyle || 'normal'} ${this.data.fontWeight || 'normal'} ${fontSize}px ${this.data.fontFamily || 'Arial'}`
 
-    const lines = []
+    const lines: string[] = []
     let currentLine = ''
     let currentWidth = 0
 
@@ -64,7 +64,7 @@ export class KitSvg {
   }
 
   render() {
-    if (this.data.type === 'image') {
+    if (!this.data || this.data.type === 'image') {
       return null
     }
     return (

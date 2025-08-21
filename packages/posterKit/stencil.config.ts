@@ -29,6 +29,7 @@ export const config: Config = {
     }),
   ],
   testing: {
-    browserHeadless: 'shell',
+    tsconfig: 'tsconfig.spec.json',
+    browserHeadless: 'new',
   },
 }
