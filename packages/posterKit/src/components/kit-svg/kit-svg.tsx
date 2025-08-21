@@ -1,5 +1,5 @@
-import { Component, h, Prop } from '@stencil/core'
 import { CardData } from '@/typing/index.d'
+import { Component, h, Prop } from '@stencil/core'
 
 @Component({
   tag: 'kit-svg',
