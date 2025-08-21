@@ -362,7 +362,7 @@ describe('kit-svg e2e', () => {
         fontFamily: 'Arial',
         fontWeight: 'normal',
         fontStyle: 'normal' as const,
-        decoration: 'none' as const
+        decoration: 'none' as const,
       }
     })
 

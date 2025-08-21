@@ -11,9 +11,17 @@
 .kit-preview {
   position: relative;
   background-color: rgb(255, 255, 255);
-  background-image: repeating-conic-gradient(rgb(204, 204, 204) 0deg, rgb(204, 204, 204) 25%, rgb(255, 255, 255) 0deg, rgb(255, 255, 255) 50%);
-  background-position: 0px 0px, 0.5rem 0.5rem;
-  background-size: 1rem 1rem;}
+  background-image: repeating-conic-gradient(
+    rgb(204, 204, 204) 0deg,
+    rgb(204, 204, 204) 25%,
+    rgb(255, 255, 255) 0deg,
+    rgb(255, 255, 255) 50%
+  );
+  background-position:
+    0px 0px,
+    0.5rem 0.5rem;
+  background-size: 1rem 1rem;
+}
 
 .kit-list {
   width: 100%;

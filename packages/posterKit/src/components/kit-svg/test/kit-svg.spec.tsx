@@ -152,7 +152,9 @@ describe('kit-svg', () => {
     expect(tspans.length).toBeGreaterThanOrEqual(1)
 
     // Check that all text content is present
-    const allText = Array.from(tspans).map(tspan => tspan.textContent).join('')
+    const allText = Array.from(tspans)
+      .map((tspan) => tspan.textContent)
+      .join('')
     expect(allText).toBe('Hello World')
 
     // First tspan should have dy="0"
