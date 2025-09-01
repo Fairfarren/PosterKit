@@ -1,5 +1,5 @@
-import { Component, h, Prop, Element } from '@stencil/core'
 import { CardData } from '@/typing/index.d'
+import { Component, Element, h, Prop } from '@stencil/core'
 
 @Component({
   tag: 'kit-card',
@@ -23,7 +23,7 @@ export class KitCard {
             width: this.data.width + 'px',
             height: this.data.height + 'px',
             transform: `translateX(${this.data.x}px) translateY(${this.data.y}px)`,
-            backgroundImage: `url(${this.data.type === 'image' ? this.data.image.src : ''})`,
+            backgroundImage: `url(${this.data.type === 'image' ? ('src' in this.data ? this.data.src : this.data.image.src) : ''})`,
             backgroundSize: '100% 100%',
             backgroundRepeat: 'no-repeat',
           }}

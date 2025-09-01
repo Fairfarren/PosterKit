@@ -1,14 +1,14 @@
+import { CardData } from '@/typing/index.d'
 import {
   Component,
-  Prop,
+  Event,
+  EventEmitter,
   h,
   Method,
+  Prop,
   State,
-  EventEmitter,
   Watch,
-  Event,
 } from '@stencil/core'
-import { CardData } from '@/typing/index.d'
 
 @Component({
   tag: 'kit-box',
@@ -44,7 +44,7 @@ export class MyComponent {
     height: 0,
     x: 0,
     y: 0,
-    image: null,
+    src: '',
     type: 'image',
   }
 
@@ -162,7 +162,15 @@ export class MyComponent {
       }
 
       if (item.type === 'image') {
-        ctx.drawImage(item.image, item.x, item.y, item.width, item.height)
+        await new Promise((resolve) => {
+          let image = new Image()
+          image.crossOrigin = 'anonymous'
+          image.src = 'src' in item ? item.src : item.image.src
+          image.onload = () => {
+            ctx.drawImage(image, item.x, item.y, item.width, item.height)
+            resolve(true)
+          }
+        })
       } else if (item.type === 'text') {
         const cardRef = this.cardRefs[index]
         if (cardRef) {

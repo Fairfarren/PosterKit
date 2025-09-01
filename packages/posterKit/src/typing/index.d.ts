@@ -12,8 +12,7 @@ interface BaseOptions {
 export type CardData =
   | (BaseOptions & {
       type: 'image'
-      image: HTMLImageElement
-    })
+    } & ({ image: HTMLImageElement } | { src: string }))
   | (BaseOptions & {
       type: 'text'
       text: string
