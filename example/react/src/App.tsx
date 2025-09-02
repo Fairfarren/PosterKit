@@ -107,29 +107,74 @@ const App = () => {
                 <div key={key} className="property-group">
                   <label className="property-label">{key}</label>
                   {isColorField && !isDisabled ? (
-                    <div className="color-input-wrapper">
-                      <input
-                        type="color"
-                        className="color-input"
-                        value={String(value).startsWith('#') ? String(value) : '#000000'}
-                        onChange={(e) => {
-                          updateData({
-                            ...currentData,
-                            [key]: e.target.value,
-                          })
-                        }}
-                      />
-                      <input
-                        type="text"
-                        className="property-input color-text-input"
-                        value={value}
-                        onChange={(e) => {
-                          updateData({
-                            ...currentData,
-                            [key]: e.target.value,
-                          })
-                        }}
-                      />
+                    <div className="color-input-group">
+                      <div className="color-input-wrapper">
+                        <input
+                          type="color"
+                          className="color-input"
+                          value={String(value).includes('#') ? String(value).substring(0, 7) : '#000000'}
+                          onChange={(e) => {
+                            const colorValue = String(value)
+                            const hasAlpha = colorValue.includes('#') && colorValue.length > 7
+                            const newColor = hasAlpha ? e.target.value + colorValue.substring(7) : e.target.value
+                            updateData({
+                              ...currentData,
+                              [key]: newColor,
+                            })
+                          }}
+                        />
+                        <div 
+                          className="color-preview"
+                          style={{
+                            backgroundColor: String(value)
+                          }}
+                        />
+                        <input
+                          type="text"
+                          className="property-input color-text-input"
+                          value={value}
+                          onChange={(e) => {
+                            updateData({
+                              ...currentData,
+                              [key]: e.target.value,
+                            })
+                          }}
+                        />
+                      </div>
+                      <div className="alpha-slider-wrapper">
+                        <label className="alpha-label">透明度</label>
+                        <input
+                          type="range"
+                          className="alpha-slider"
+                          min="0"
+                          max="255"
+                          value={(() => {
+                            const colorValue = String(value)
+                            if (colorValue.includes('#') && colorValue.length > 7) {
+                              return parseInt(colorValue.substring(7), 16)
+                            }
+                            return 255
+                          })()}
+                          onChange={(e) => {
+                            const colorValue = String(value)
+                            const baseColor = colorValue.includes('#') ? colorValue.substring(0, 7) : '#000000'
+                            const alpha = parseInt(e.target.value).toString(16).padStart(2, '0')
+                            updateData({
+                              ...currentData,
+                              [key]: baseColor + alpha,
+                            })
+                          }}
+                        />
+                        <span className="alpha-value">
+                          {Math.round(((() => {
+                            const colorValue = String(value)
+                            if (colorValue.includes('#') && colorValue.length > 7) {
+                              return parseInt(colorValue.substring(7), 16)
+                            }
+                            return 255
+                          })() / 255) * 100)}%
+                        </span>
+                      </div>
                     </div>
                   ) : isNumberField && !isDisabled ? (
                     <input

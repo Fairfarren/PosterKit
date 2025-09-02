@@ -226,6 +226,12 @@ body {
   padding-right: 40px;
 }
 
+.color-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .color-input-wrapper {
   display: flex;
   gap: 8px;
@@ -249,10 +255,107 @@ body {
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
+.color-preview {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  background-image: 
+    linear-gradient(45deg, #ccc 25%, transparent 25%), 
+    linear-gradient(-45deg, #ccc 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #ccc 75%), 
+    linear-gradient(-45deg, transparent 75%, #ccc 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+}
+
 .color-text-input {
   flex: 1;
   font-family: 'Courier New', monospace;
   font-size: 13px;
+}
+
+.alpha-slider-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.alpha-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4a5568;
+  min-width: 50px;
+}
+
+.alpha-slider {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(45deg, #ccc 25%, transparent 25%), 
+              linear-gradient(-45deg, #ccc 25%, transparent 25%), 
+              linear-gradient(45deg, transparent 75%, #ccc 75%), 
+              linear-gradient(-45deg, transparent 75%, #ccc 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  position: relative;
+}
+
+.alpha-slider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,1) 100%
+  );
+  pointer-events: none;
+}
+
+.alpha-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #667eea;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.alpha-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.alpha-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #667eea;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.alpha-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: #667eea;
+  min-width: 35px;
+  text-align: right;
 }
 
 .result-section {

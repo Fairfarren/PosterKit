@@ -42,30 +42,79 @@
         <div :key="key" v-for="[key, value] in Object.entries(currentData)" class="property-group">
           <label class="property-label">{{ key }}</label>
           
-          <!-- Color input -->
-          <div v-if="key === 'color' && !['id', 'type', 'image'].includes(key)" class="color-input-wrapper">
-            <input
-              type="color"
-              class="color-input"
-              :value="String(value).startsWith('#') ? String(value) : '#000000'"
-              @input="
-                updateData({
-                  ...currentData,
-                  [key]: $event.target?.value,
-                })
-              "
-            />
-            <input
-              type="text"
-              class="property-input color-text-input"
-              :value="String(value)"
-              @input="
-                updateData({
-                  ...currentData,
-                  [key]: $event.target?.value,
-                })
-              "
-            />
+          <!-- Color input with alpha -->
+          <div v-if="key === 'color' && !['id', 'type', 'image'].includes(key)" class="color-input-group">
+            <div class="color-input-wrapper">
+              <input
+                type="color"
+                class="color-input"
+                :value="String(value).includes('#') ? String(value).substring(0, 7) : '#000000'"
+                @input="
+                  (() => {
+                    const colorValue = String(value)
+                    const hasAlpha = colorValue.includes('#') && colorValue.length > 7
+                    const newColor = hasAlpha ? $event.target?.value + colorValue.substring(7) : $event.target?.value
+                    updateData({
+                      ...currentData,
+                      [key]: newColor,
+                    })
+                  })()
+                "
+              />
+              <div 
+                class="color-preview"
+                :style="{
+                  backgroundColor: String(value)
+                }"
+              />
+              <input
+                type="text"
+                class="property-input color-text-input"
+                :value="String(value)"
+                @input="
+                  updateData({
+                    ...currentData,
+                    [key]: $event.target?.value,
+                  })
+                "
+              />
+            </div>
+            <div class="alpha-slider-wrapper">
+              <label class="alpha-label">透明度</label>
+              <input
+                type="range"
+                class="alpha-slider"
+                min="0"
+                max="255"
+                :value="(() => {
+                  const colorValue = String(value)
+                  if (colorValue.includes('#') && colorValue.length > 7) {
+                    return parseInt(colorValue.substring(7), 16)
+                  }
+                  return 255
+                })()"
+                @input="
+                  (() => {
+                    const colorValue = String(value)
+                    const baseColor = colorValue.includes('#') ? colorValue.substring(0, 7) : '#000000'
+                    const alpha = parseInt($event.target?.value).toString(16).padStart(2, '0')
+                    updateData({
+                      ...currentData,
+                      [key]: baseColor + alpha,
+                    })
+                  })()
+                "
+              />
+              <span class="alpha-value">
+                {{ Math.round((((() => {
+                  const colorValue = String(value)
+                  if (colorValue.includes('#') && colorValue.length > 7) {
+                    return parseInt(colorValue.substring(7), 16)
+                  }
+                  return 255
+                })() / 255) * 100)) }}%
+              </span>
+            </div>
           </div>
           
           <!-- Number input -->
