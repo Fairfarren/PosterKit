@@ -1,7 +1,7 @@
+import 'poster-kit/dist/vue/index.ts'
 import { createApp } from 'vue'
 import App from './App.vue'
 import './index.css'
-import 'poster-kit/dist/vue/index.ts'
 
 const app = createApp(App)
 
