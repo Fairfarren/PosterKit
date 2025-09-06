@@ -36,34 +36,6 @@ bun add poster-kit
 
 ### 基础使用
 
-#### HTML / Vanilla JS
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <script type="module" src="https://unpkg.com/poster-kit/dist/posterKit/posterKit.esm.js"></script>
-</head>
-<body>
-  <kit-svg id="poster"></kit-svg>
-
-  <script>
-    const poster = document.getElementById('poster');
-    poster.data = {
-      id: 'text-1',
-      type: 'text',
-      text: 'Hello PosterKit!',
-      fontSize: 24,
-      fontFamily: 'Arial',
-      color: '#333333',
-      width: 300,
-      height: 100
-    };
-  </script>
-</body>
-</html>
-```
-
 #### React
 
 ```tsx
